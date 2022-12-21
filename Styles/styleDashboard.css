@@ -1,0 +1,400 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&display=swap');
+
+*{
+    margin: 0;
+}
+
+body{
+    height: 100vh;
+    background: var(--bg-color);
+    display: flex;
+}
+
+/*  Temas  */
+
+body[data-theme="t-dark"] {
+    --bg-color: rgb(0, 0, 0);
+    --border: rgb(49, 46, 46);
+    --text-color: rgb(229, 246, 255);
+    --bg-cards: rgb(66, 66, 66);
+}
+
+
+body[data-theme="t-light"] {
+    --bg-color: rgb(255, 255, 255);
+    --border: rgba(0, 0, 0, 0.1);
+    --text-color: rgb(49, 46, 46);
+    --bg-cards: rgb(247, 249, 251);
+}
+
+
+/*  Modal  */
+
+.modal{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(131, 125, 125, 0.5);
+}
+
+.buttonClose{
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 30px;
+}
+
+.modalContent{
+    background-color: var(--bg-color);
+    padding: 20px 30px;
+    width: 384px;
+    border-radius: 0.5rem;
+    color: var(--text-color);
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+/*  Menu  */
+
+nav{
+    width: 212px;
+    height: 100%;
+    border-right: 1px solid var(--border);
+    font-family: 'Josefin Sans', sans-serif;
+    padding: 25px;
+    color: var(--text-color);
+}
+
+.user{
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+}
+
+ul{
+    margin-top: 20px;
+}
+
+h6{
+    margin-top: 25px;
+    font-size: 15px;
+    color: #5e5d5d;
+}
+
+ul li{
+    margin-bottom: 10px;
+}
+
+.DecorationNone{
+    list-style: none;
+    margin-left: 0;
+}
+
+/*  Main  */
+
+main{
+    height: 100%;
+    width: 100%;
+}
+
+/*  Cabeçalho  */
+
+header{
+    height: 72px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-direction: row;
+    font-family: 'Josefin Sans', sans-serif;
+    justify-content: space-between;  
+    align-items: center;
+}
+
+#section1Header{
+    display: flex;
+    align-items: center;
+    margin-left: 29px;
+    gap: 8px;
+    color: var(--text-color);
+}
+
+.voltar{
+    display: flex;
+    text-decoration: none;
+    color: var(--text-color);
+    align-items: center;
+    gap: 8px;
+}
+
+#section1Header h5{
+    display: flex;
+    align-items: center;
+    border: 0px;
+}
+
+
+#section2Header{
+    display: flex;
+    align-items: center;
+    margin-right: 29px;
+    gap: 8px;
+}
+
+#search{
+    position: relative;
+}
+
+.inputsearch{
+    background-color: var(--bg-cards);
+    padding-left: 22px;
+    border-radius: 8px;
+    width: 160px;
+    height: 25px;
+    border: none;
+}
+
+#search i{
+    left: 4px;
+    font-size: 14px;
+    position: absolute;
+    top: 6px;
+    color: #5e5d5d;
+}
+
+.iconsSectionHeader{
+    display: flex;
+    color: var(--text-color);
+    margin-left: 12px;
+    gap: 8px;
+}
+
+.inputsearch:focus{
+    outline: none;
+    color: var(--text-color);
+}
+
+/*  Gráficos  */
+
+
+#section1{
+    display: flex;
+    gap: 28px;
+    margin: 64px 28px 0 28px;
+    justify-content: center;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.FlexWrap{
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+}
+
+.cardsSection1{
+    background-color: var(--bg-cards);
+    width: 202px;
+    height: 102px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: var(--text-color);
+}
+
+.cardsSection1 h2, h4{
+    margin: 10px;
+}
+
+#section2{
+    display: flex;
+    gap: 28px;
+    margin: 28px 28px 0 28px;
+    justify-content: center;
+}
+
+#cardGraphic{
+    max-width: 662px;
+    max-height: 320px;
+    background-color: var(--bg-cards);
+    border-radius: 16px;
+}
+
+#cardProjetos{
+    width: 202px;
+    height: 320px;
+    background-color: var(--bg-cards);
+    border-radius: 16px;
+    font-family: 'Josefin Sans', sans-serif;
+    color: var(--text-color);
+}
+
+#cardProjetos h3{
+    margin: 15px 10px 10px 10px;
+}
+
+.missoesCardProjetos{
+    align-items: center;
+    margin-right: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+#section3{
+    display: flex;
+    gap: 28px;
+    margin: 28px 28px 0 28px;
+    justify-content: center;
+}
+
+#cardInstitution{
+    max-width: 432px;
+    max-height: 273px;
+    background-color: var(--bg-cards);
+    border-radius: 16px;
+}
+
+#cardCountries{
+    max-width: 432px;
+    max-height: 273px;
+    background-color: var(--bg-cards);
+    border-radius: 16px;
+}
+
+/*  Animações  */
+
+.cardsSection1:hover, #cardGraphic:hover, #cardProjetos:hover, #cardInstitution:hover, #cardCountries:hover{
+    box-shadow: 1px 1px 10px 5px var(--bg-cards);
+}
+
+.teme-js:hover{
+    cursor: pointer;
+}
+
+.fa-regular:hover, .fa-solid:hover{
+    transform: translateY(-1px);
+}
+
+.fa-bars{
+    opacity: 0;
+}
+
+/*  Informações á Direita */
+
+aside{
+    width: 280px;
+    height: 100%;
+    border-left: 1px solid var(--border);
+    color: var(--text-color);
+    font-family: 'Josefin Sans', sans-serif;
+    padding: 25px;
+}
+
+.listaAstronautas{
+    display: flex;
+    margin: 15px 0 15px 0;
+    
+}
+
+.imgAstronautas{
+    width: 40px;
+    border-radius: 50%;
+}
+
+/*  Resmponsividade */
+
+@media (max-width: 1369px){
+    
+    nav{
+        display: none;
+        position: absolute;
+        width: 0;
+        top: 72px;
+        background-color: var(--bg-color);
+        transition: 10;
+    }
+
+    .nav.active{
+        display: block;
+        width: 150px;
+    }
+
+    aside{
+        display: none;
+    }
+    
+    .fa-bars{
+        opacity: 1;
+    }
+
+    .voltar{
+        display: none;
+    }
+}
+
+
+@media (max-width: 947px){
+    
+    #cardProjetos{
+        display: none;
+    }
+
+    #section3{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #cardGraphic{
+        max-width: 432px;
+        max-height: 273px;
+    }
+
+    nav, aside{
+        display: none;
+    }
+
+    #section1{
+        flex-wrap: wrap;
+    }
+
+    #search{
+        display: none;
+    }
+
+    .fa-bars{
+        opacity: 1;
+    }
+}
+
+
+@media (max-width: 487px){
+
+    #section1{
+        margin-top: 10px;
+        padding: 0;
+        gap: 10px;
+    }
+
+    .FlexWrap{
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .cardsSection1{
+        width: 98%;
+        flex-direction: row;
+        align-items: center;
+        height: 50px;
+    }
+
+    .fa-bars{
+        opacity: 1;
+    }
+}
+

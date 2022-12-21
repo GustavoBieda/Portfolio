@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: black;
+    height: 100vh;
+ 
+
+}
+
+main{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: center;
+}
+
+a{  
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+
+    color: #f0f8ff;
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-family: 'Josefin Sans', sans-serif;
+    padding: 5px;
+}
+
+a p{
+    margin-top: 2px;
+}
+
+#img{
+    height: auto;
+    max-height: 20px;
+    max-width: 20px;
+}
+
+#sections{
+    display: flex;
+
+    justify-content: space-between;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+
+section h1{
+    font-size: 2rem;
+    font-family: 'Josefin Sans', sans-serif;
+    margin-bottom: 30px;
+    color: #f0f8ff;
+}
+
+section h3{
+    color: aliceblue;
+    font-size: 1.5rem;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+main img{
+    width: 500px;
+}
+
+
+#form{
+    display: flex;
+    flex-direction: column;
+}
+
+#form label{
+    font-size: 1.5rem;
+    font-family: 'Josefin Sans', sans-serif;
+    margin: 50px 0 10px 0;
+    color: aliceblue;
+}
+
+#form input{
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid rgb(88, 89, 170);
+    background-color: black;
+    color: aliceblue;
+    font-size: 1.5rem;
+}
+
+#form input:focus{
+    outline: none;
+    border-bottom: 2px solid rgb(144, 49, 221);
+}
+
+#form input::placeholder{
+    font-size: 1.5rem;
+}
+
+button{
+    cursor: pointer;
+    width: 100%;
+    margin-top: 30px;
+    height: 40px;
+    border-radius: 8px;
+    padding: 10px;
+
+    font-size: 1.5rem;
+    font-family: 'Josefin Sans', sans-serif;
+
+    background-color: rgb(88, 89, 170);
+    color: aliceblue;
+
+    border: none;
+    box-shadow: 1px 1px 1px white;
+}
+
+button:hover{
+    background-color: aliceblue;
+    color: rgb(88, 89, 170);
+}
+
+@media (max-width: 890px)
+{
+  #sections{
+    display: flex;
+    flex-direction: column;
+  }
+
+  #section2{
+    display: none;
+  }
+
+  #section1{
+    
+
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+
+  #section1 h1, #section1 h3{
+    text-align: center;
+  }
+  
+}
+
+@media (max-width: 520px){
+
+
+    
+    section h1{
+        font-size: 1.5rem;
+    }
+
+    section h3, #form input, #form label, #form input::placeholder, button{
+        font-size: 1rem;
+    }
+
+    #sections{
+        margin: 0;
+    }
+
+
+}

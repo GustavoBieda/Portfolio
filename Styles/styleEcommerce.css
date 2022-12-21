@@ -1,0 +1,822 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&display=swap');
+
+*{
+    margin: 0;
+}
+
+body{
+    font-family: 'Josefin Sans', sans-serif;
+    width: 100%;
+}
+
+
+main{
+    background-color: #170b2a;
+    border-radius: 20px;
+}
+
+header{
+    background-color: #170b2a;
+    height: 88px;
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 20px;
+    
+}
+
+#ButtonMenu{
+    display: none;
+    
+}
+
+#MainMenu{
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    padding-left: 0;
+    gap: 35px;
+    border-bottom: 2px solid transparent;
+}
+
+#MainMenu li:hover{
+    border-bottom: 1px solid rgb(235, 243, 243);
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+
+#logo{
+    height: 30px;
+}
+
+#MenuIcons{
+    display: flex;
+    gap: 25px;
+}
+
+#Mural{
+    margin: 0 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#MsgMural{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+#buttonMural{
+    height: 100px;
+    width: 350px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 30px;
+    border-radius: 20px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+}
+
+#buttonMural:hover{
+    box-shadow: 1px 1px 10px 1px white;
+}
+
+#ImgMural{
+    width: 500px;
+}
+
+/* --------------------------------------------------- */
+
+#sectionCategory{
+    height: 1184px;
+}
+
+#sectionCategory h2{
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    font-size: 50px;
+    text-align: center;
+}
+
+#containerCategory{
+    display: flex;
+    margin: 110px 20px;
+    gap: 60px;
+    justify-content: center;
+}
+
+#MenuCategory{
+    width: 349px;
+    height: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+#MenuCategory input{
+    height: 75px;
+    font-size: 30px;
+    background-color: rgb(235, 243, 243);
+    font-family: 'Josefin Sans', sans-serif;
+    border: none;
+    padding-left: 30px;
+    border-radius: 10px;
+    
+}
+
+#MenuCategory button{
+    height: 89px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 30px;
+    border-radius: 20px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+}
+
+#MenuCategory button:hover{
+    box-shadow: 1px 1px 10px 1px rgb(235, 243, 243);
+}
+
+#MenuCategory ul{
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+    list-style-type: none;
+    font-size: 24px;
+}
+
+#MenuCategory a{
+    color: #170b2a;
+}
+
+#Category{
+    height: 900px;
+    display: flex;
+    gap: 26px;
+}
+
+.cadsCategory{
+    width: 500px;
+    height: 345px;
+    background-color: rgb(235, 243, 243);
+}
+
+.sectionCadsCategory{
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    
+}
+
+.cardHover{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(23, 11, 42, 0.2);
+    display: none;
+}
+
+.imgCardsCategory{
+    height: 100px;
+}
+
+.InfoCards{
+    display: flex;  
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.InfoCards h4{
+    font-size: 50px;
+}
+
+.buttonHover{
+    height: 89px;
+    width: 150px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 30px;
+    border-radius: 20px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    animation: Animação 0.2s ease forwards;
+}   
+
+
+.cadsCategory:hover .cardHover, .buttonHover{
+    display: flex;
+}
+
+.cadsCategory:hover .InfoCards{
+    display: none;
+}
+
+
+@keyframes Animação{
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* --------------------------------------------------- */
+
+#PopularProducts{
+    height: 950px;
+}
+
+#PopularProducts h2{
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    font-size: 50px;
+    text-align: center;
+}
+
+#imgTelescopio{
+    position: absolute;
+    width: 450px;
+    top: 2108px;
+    left: -100px;
+}
+
+#ContainerCardsPopularProducts{
+    height: 585px;
+    display: flex;
+    gap: 32px;
+    overflow-x: auto;
+    margin: 54px 0 10px 195px;
+}
+
+#ContainerCardsPopularProducts::-webkit-scrollbar{
+    height: 10px;
+}
+
+#ContainerCardsPopularProducts::-webkit-scrollbar-thumb{
+    background-color: rgb(154, 155, 155);
+    border-radius: 10px;
+}
+
+.CardsPopularProducts{
+    min-width: 430px;
+    background-color: rgb(235, 243, 243);
+    margin-bottom: 10px;
+    z-index: 2;
+    color: #170b2a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    gap: 10px;
+}
+
+.imgCardsPopularProducts{
+    height: 300px;
+    margin-bottom: 50px;
+}
+
+
+.CardsPopularProducts a{
+ color: #47db85;
+ border-bottom: 2px solid transparent;
+
+}
+
+.CardsPopularProducts a:hover{
+    border-bottom: 2px solid #47db85;
+}
+
+
+
+
+#ButtonPopularProducts{
+    margin: 0 auto;
+    color: #170b2a;
+    width: 265px;
+    height: 73px;
+    background-color: rgb(235, 243, 243);
+    margin-top: 100px;
+    margin-bottom: 100px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 30px;
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+#ButtonPopularProducts:hover{
+    box-shadow: 1px 1px 10px 1px rgb(235, 243, 243);
+}
+
+
+
+/* --------------------------------------------------- */
+
+#Benefits{
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    background-color: rgb(235, 243, 243);
+    align-items: center;
+    padding: 100px;
+}
+
+#Benefits h2{
+    font-weight: 700;
+    font-size: 64px;
+    margin-bottom: 104px;
+}
+
+#sectionsVantagens{
+    display: flex;
+    justify-content: center;
+    gap: 232px;
+    text-align: center;
+}
+
+.fa-hand-holding-dollar, .fa-rotate-left, .fa-headset{
+    margin-bottom: 32px;
+    font-size: 88px;
+    text-align: center;
+}
+
+.cardVantagens h6{
+    font-weight: 700;
+    font-size: 36px;
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.cardVantagens p{
+    font-weight: 400;
+    font-size: 24px;
+    text-align: center;
+}
+
+/* --------------------------------------------------- */
+
+
+#Review{
+    height: 750px;
+    
+}
+
+#Review h2{
+    font-weight: 700;
+    font-size: 64px;
+    text-align: center;
+    margin-top: 100px;
+}
+
+#Review h5{
+    margin-top: 35px;
+    font-weight: 400;
+    font-size: 36px;
+    text-align: center;
+}
+
+#areaReview{
+    display: flex;
+    margin-top: 107px;
+    justify-content: center;
+}
+
+#textReview{
+    font-weight: 400;
+    font-size: 36px;
+    margin: 55px 97px 0 97px;
+}
+
+#nameReview{
+    font-weight: 700;
+    font-size: 24px;
+    margin-top: 65px;
+}
+
+#ocupationReview{
+    font-weight: 300;
+    font-size: 24px;
+}
+
+.fa-quote-left{
+    position: relative;
+    font-size: 100px;
+    left: 50px;
+    top: -30px;
+    color: #170b2a;
+}
+
+#areaReview img{
+    border-radius: 10px;
+    height: 390px;
+    width: 401px;
+}
+
+#linkReview{
+    font-weight: 400;
+    font-size: 18px;
+    display: flex;
+    margin-top: 50px;
+    color: #170b2a;
+    gap: 10px;
+    align-items: center;
+    justify-content: end;
+    margin-right: 50px;
+    
+}
+
+#textReview p{
+    font-size: 25px;
+}
+
+/* ---------------------------------------- */
+
+footer {
+    height: 525px;
+    background-color: #170b2a;
+    color: aliceblue;
+    
+}
+
+#sectionFooter{
+    height: 90%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#Container1Footer{
+    font-size: 18px;
+}
+
+p b{
+    font-weight: 700;
+}
+
+p{ 
+    font-weight: 300;
+    font-size: 18px;
+}
+
+#Container1Footer img{
+    height: 30px;
+    display: inline;
+    margin-bottom: 10px;
+}
+
+#SocialLink{
+    display: flex;
+    font-size: 30px;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.MenuFooter li{
+    margin-bottom: 20px;
+    gap: 10px;
+    list-style-type: none;
+    font-weight: 300;
+    font-size: 18px;
+} 
+
+.MenuFooter ul{
+    padding-left: 0;
+}
+
+.MenuFooter ul li:first-child{
+    font-weight: 700;    
+}
+
+footer h6{
+    font-size: 18px;
+}
+
+#Newslatter input{
+    margin-top: 18px;
+    height: 30px;
+    width: 200px;
+    border: none;
+    font-size: 18px;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+#Newslatter input:focus{
+    outline: 0;
+   
+}
+
+#Newslatter button{
+    height: 32px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 18px;
+    background-color: aliceblue;
+    color: #170b2a;
+    border: none;
+    cursor: pointer;
+    border-left: 1px solid #170b2a;
+}
+
+#Newslatter button:hover{
+    height: 32px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 18px;
+    background-color: #403257;
+    color: aliceblue;
+    border: none;
+    cursor: pointer;
+    border-left: 1px solid #170b2a;
+}
+
+h5{
+    font-size: 18px;
+    text-align: center;
+    font-weight: 300;
+}
+
+
+@media (max-width: 1427px)
+{
+    #MenuCategory{
+        display: none;
+    }
+}
+
+
+
+@media (max-width: 1024px)
+{
+    #ImgMural{
+        width: 400px;
+    }
+
+    #Category{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        display: block;
+    }
+
+    .sectionCadsCategory{
+        margin-bottom: 30px;
+    }
+
+    #sectionCategory{
+        height: 2390px;
+    }
+
+    #imgTelescopio{
+        display: none;
+    }
+
+    #PopularProducts{
+        margin-bottom: 20px;
+        
+    }
+
+    
+
+    #sectionsVantagens{
+        display: flex;
+        flex-direction: column;
+        gap: 70px;
+        
+    }
+
+    #Benefits{
+        height: 1000px;
+    }
+
+    #areaReview{
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+    }
+
+    .fa-quote-left{
+        left: -180px;
+        top: 50px;
+        
+    }
+
+    #linkReview{
+        
+        font-size: 30px;
+        align-items: center;
+        justify-content: center;
+        margin-right: 50px;
+    }
+
+    #Review h2{
+        
+        font-size: 50px;
+        
+    }
+
+    #Review{
+        height: 1000px;   
+    }
+
+    #sectionFooter{
+        flex-direction: column;
+    }
+
+    footer {
+        margin-top: 30px;
+        height: 950px;
+        
+    }
+
+    #sectionFooter{
+        align-items: center;
+    }
+
+    #Container1Footer{
+        width: 150px;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .MenuFooter{
+        width: 100px;
+        text-align: center;
+    }
+  
+    
+    
+    
+}
+
+
+@media (max-width: 800px)
+{
+    header{
+        justify-content: space-between;
+    }
+
+    .fa-bars{
+        color: aliceblue;
+        font-size: 30px;
+    }
+
+    #logo{
+        height: 40px;
+    }
+
+    #MenuIcons{
+        display: none;
+    }
+
+    #ButtonMenu{
+        display: flex;
+        padding: 20px;
+        align-items: center;
+        border: none;
+        background: none;
+        
+    }
+
+    #MainMenu{
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 0;
+        top: 88px;
+        right: 0;
+        background-color: #170b2a;
+        z-index: 10;
+        transition: 0.5s;
+        visibility: hidden;
+        overflow-y: hidden;
+    }
+
+    #nav.active #MainMenu{
+        height: calc(100vh - 88px);
+        visibility: visible;
+    }
+
+    #ImgMural{
+        display: none;
+    }
+
+    #MainMenu li{
+        padding: 50px 10px;
+        margin: 0 50px;
+        font-size: 2.5rem;
+        border-bottom: 1px solid rgb(235, 243, 243, 0.3);
+    }
+
+
+    #MsgMural{
+        align-items: center;
+        margin: 100px 0;
+        text-align: center;
+    }
+
+    #Mural{
+        justify-content: center;
+    }
+
+    .cadsCategory{
+        width: 400px;
+    }
+
+    #sectionCategory h2{
+        font-size: 40px;
+    }
+
+    #ContainerCardsPopularProducts{
+        margin-left: 20px;
+    }
+
+    #Benefits{
+        height: 1200px;
+    }
+
+    #Benefits h2{
+        font-size: 50px;
+    }
+
+    #areaReview img{
+        
+        height: 340px;
+        width: 351px;
+    }
+
+    #Review{
+        height: 1100px;   
+    }
+
+    .MainMenu{
+        display: none;
+        position: absolute;
+        width: 0;
+        top: 72px;
+        background-color: var(--bg-color);
+        transition: 10;
+    }
+
+    .MainMenu.active{
+        display: block;
+        width: 150px;
+    }
+
+    
+}
+
+
+
+@media (max-width: 400px){
+    #buttonMural{
+        height: 100px;
+        width: 250px;
+        font-size: 25px;
+    }
+
+    .cadsCategory{
+        width: 280px;
+    }
+
+    .imgCardsCategory{
+        display: none;
+    }
+
+    .CardsPopularProducts{
+        min-width: 300px;
+        text-align: center;
+    }
+
+    #areaReview img{
+        
+        height: 250px;
+        width: 261px;
+    }  
+
+    #linkReview{
+        font-size: 25px;
+        margin: 30px;
+    }
+
+    
+}

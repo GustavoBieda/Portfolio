@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+*{
+    margin:0;
+}
+
+body{
+    background-color: aliceblue;
+}
+
+ 
+#container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}    
+
+#shadows {
+    position: relative;
+    text-shadow: -15px 5px 20px rgb(63, 62, 62);
+    color: rgb(77, 77, 77);
+    letter-spacing: -0.13em;
+    font-family: 'Anton', Arial, sans-serif;
+    user-select: none;
+    font-size: 150px;
+    transition: all 0.25s ease-out;
+  
+}
+
+#shadows:hover {
+    text-shadow: -16px 6px 15px rgb(63, 62, 62);
+}

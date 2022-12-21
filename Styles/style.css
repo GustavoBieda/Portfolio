@@ -1,0 +1,595 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;700&display=swap');
+
+*{
+    margin: 0;
+    font-family: 'Josefin Sans', sans-serif;
+    color: white;
+}
+
+h2{
+    font-size: 50px;
+}
+
+h3{
+    font-size: 25px;
+}
+
+
+body{
+    height: 100vh;
+}
+
+main{
+    
+    background-image: url(../Imagens/background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+#Cabecalho{
+    height: 100px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba( 0, 0, 0, 0.8 );
+}
+
+#MenuMain{
+    display: flex;
+    gap: 20px;
+    font-size: 20px;
+    color: white;
+    list-style-type: none;
+    
+}
+
+#MenuMain a{
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+#MenuMain a:hover{
+    color: #5356A9;
+    transition: color 0.3s ease;
+}
+
+
+#SectionsMain{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1500px;
+    margin: 50px 50px 110px;
+    padding: 100px 0;
+}
+
+#TextMain{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+#TextMain h1{
+    font-weight: 400;
+    font-size: 100px;
+}
+
+.Icons{
+    font-size: 40px;
+    display: flex;
+    gap: 20px;
+    transition: color ease 0.5s;
+}
+
+.fa-linkedin-in:hover, .fa-github:hover, .fa-instagram:hover, .fa-envelope:hover{
+    transition: color ease 0.5s;
+    color: #5356A9;
+}
+
+#ButtonMenu{
+    display: none;
+}
+
+/* ---------------------------------- */
+
+#ContainerHabilidades{
+    background-color: black;
+    
+    
+}
+
+#Habilidades{
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    max-width: 1500px;
+    margin: 0 auto;
+    text-align: center;
+    height: 100%;
+}
+
+#SectionCardsHabilidades{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.CardsHabilidades{
+    height: 484px;
+    width: 373px;
+    background: linear-gradient(327.89deg, #2B6274 2.53%, rgba(174, 18, 18, 0.21) 34.08%);
+    border: 6px solid #ffffff;
+    border-radius: 55px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    text-align: left;
+    gap: 20px;
+    transition: border ease 0.5s;
+    
+}
+
+.CardsHabilidades:hover{
+    border: 6px solid #5356A9;
+    transition: border ease 0.5s;
+    
+}
+
+.CardsHabilidades h3{
+    padding: 20px;
+}
+
+.CardsHabilidades ul{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 25px;
+}
+
+
+/* ------------------------------- */
+
+#ContainerProjetos{
+    background-color: black;
+    padding: 200px 0 200px 0;
+}
+
+#Projetos{
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    max-width: 1500px;
+    margin: 0 auto;
+    text-align: center;
+    height: 100%;
+}
+
+.SectionCardsProjetos{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.CardsProjetos{
+    display: flex;
+    width: 373px;
+    height: 154px;
+    justify-content: right;
+    padding-right: 20px;
+
+    border: 6px solid #ffffff;
+    border-radius: 31px;
+}
+
+
+#Planet1{
+    background-image: url(../Imagens/Planet1.png);
+    background-repeat: no-repeat;
+    background-position-x: -50px;
+    background-position-y: -50px;
+    background-size: 200px;
+    transition: background-size ease 0.5s;
+}
+
+#Planet2{
+    background-image: url(../Imagens/Planet2.png);
+    background-repeat: no-repeat;
+    background-position-x: -50px;
+    background-position-y: -50px;
+    background-size: 200px;
+    transition: background-size ease 0.5s;
+}
+
+#Planet3{
+    background-image: url(../Imagens/Planet3.png);
+    background-repeat: no-repeat;
+    background-position-x: -50px;
+    background-position-y: -50px;
+    background-size: 200px;
+    transition: background-size ease 0.5s;
+}
+
+#Planet4{
+    background-image: url(../Imagens/planet4.png);
+    background-repeat: no-repeat;
+    background-position-x: -50px;
+    background-position-y: -50px;
+    background-size: 200px;
+    transition: background-size ease 0.5s;
+}
+
+#Planet5{
+    background-image: url(../Imagens/Planet5.png);
+    background-repeat: no-repeat;
+    background-position-x: -50px;
+    background-position-y: -50px;
+    background-size: 200px;
+    transition: background-size ease 0.5s;
+}
+
+#Planet6{
+    background-image: url(../Imagens/Planet6.png);
+    background-repeat: no-repeat;
+    background-position-x: -50px;
+    background-position-y: -50px;
+    background-size: 200px;
+    transition: background-size ease 0.5s;
+}
+
+#Planet1:hover, #Planet2:hover, #Planet3:hover, #Planet4:hover, #Planet5:hover, #Planet6:hover{
+    background-size: 300px;
+    transition: background-size ease 0.5s;
+    border: 6px solid #5356A9;
+}
+
+.CardsProjetos a{
+    font-size: 50px;
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+    gap: 20px;
+}
+
+/* ------------------------------- */
+
+#ContainerCertificados{
+    height: 1050px;
+    background-image: url(../Imagens/background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+#Certificados{
+    max-width: 1500px;
+    margin: 0 auto;
+    text-align: center;
+    height: 100%;
+    background-image: url(../Imagens/BuracoNegro.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+}
+
+.ImgCertificados{
+    width: 250px;
+    border: #ffffff solid 3px;
+    padding: 3px;
+    
+}
+
+.ImgCertificados:hover{
+    
+    border: #5356A9 solid 3px;
+    transition: border ease 0.5s;
+    
+}
+
+.ListaCertificados{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 300px;
+}
+
+#ListaCertificadosMeio{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 700px;
+}
+
+.ButtonCertificado{
+    margin: 0;
+    background-color: black;
+    cursor: pointer;
+}
+
+.ImgCertificadosModal{
+    width: 1000px;
+    margin-top: 100px;
+}
+
+#Buttonfechar, #Buttonfechar1, #Buttonfechar2, #Buttonfechar3, #Buttonfechar4, #Buttonfechar5{
+    position: relative;
+    left: -1000px;
+    top: -670px;
+    height: 50px;
+    font-size: 25px;
+    background-color: #5356A9;
+    color: #ffffff;
+    cursor: pointer;
+    border: none;
+    border: #ffffff solid 2px;
+}
+
+#Buttonfechar:hover, #Buttonfechar1:hover, #Buttonfechar2:hover, #Buttonfechar3:hover, #Buttonfechar4:hover, #Buttonfechar5:hover{
+    background-color: #ffffff;
+    color: #5356A9;
+    border: #5356A9 solid 2px;
+}
+
+dialog{
+    height: 100%;
+    background-color: rgba( 0, 0, 0, 0.8 );
+    border: none;
+    width: 100%;
+}
+
+
+/* ------------------------------- */
+
+#ContainerContato{
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    padding: 80px;
+}
+
+#Contato{
+    display: flex;
+    gap: 100px;
+    max-width: 1500px;
+    justify-content: space-around;
+    text-align: center;
+    height: 100%;
+    align-items: center;
+}
+
+#ImgContato{
+    width: 300px;
+    border-radius: 50%;
+    padding: 5px;
+    border: #5356A9 solid 2px;
+}
+
+#TextContato{
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#CopiarTexto{
+    display: flex;
+    align-items: center;
+}
+
+#CopiarTexto input{
+    background-color: black;
+    border: none;
+    height: 20px;
+    width: 350px;
+    font-size: 20px;
+    outline: 0;
+    border: 1px solid #5356A9;
+    padding: 10px;
+}
+
+#ButtonCopiar{
+    background-color: #5356A9;
+    font-size: 20px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+
+@media (max-width: 1265px){
+    #Certificados{
+        background-size: 500px;
+    }
+
+    #ListaCertificadosMeio{
+        gap: 400px;
+    }
+    
+}
+
+
+@media (max-width: 1000px){
+    #SectionCardsHabilidades{
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    .SectionCardsProjetos{
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    #Projetos{
+        gap: 50px;
+    }
+    
+    #Certificados{
+        background-image: none;
+        
+    }
+
+    #ListaCertificadosMeio, .ListaCertificados{
+        gap: 100px;
+    }
+
+    #Contato{
+        flex-direction: column;
+    }
+
+    #TextContato{
+        align-items: center;
+    }
+}
+
+@media (max-width: 815px){
+    
+    #MenuMain{
+        display: block;
+        position: absolute;
+        width: 100%;
+        top: 100px;
+        right: 0;
+        background-color: black;
+        height: 0;
+        transition: 0.5s;
+        visibility: hidden;
+        overflow-y: hidden;
+        
+        z-index: 1;
+    }
+
+    #MenuMain li{
+        font-size: 50px;
+        margin-bottom: 100px;
+        padding: 0 50px;
+    }
+
+    #ButtonMenu{
+        display: block;
+        background-color: black;
+        border: none;
+        font-size: 30px;
+    }
+
+    .fa-xmark{
+        visibility: hidden;
+    }
+
+    #Cabecalho{
+        width: 90%;
+        justify-content: left;  
+    }
+
+    #nav.active #MenuMain{
+        height: calc(100vh - 100px);
+        visibility: visible;
+    }
+
+    #nav.active .fa-bars{
+        display: none;
+    }
+
+    #nav.active .fa-xmark{
+        visibility: visible;
+    }
+    
+    #SectionsMain{
+        flex-direction: column-reverse;
+        gap: 50px;
+
+        margin: 50px 50px 100px 50px;
+        padding: 0;
+    }
+
+    #TextMain{
+        align-items: center;
+    }
+    
+    #TextMain h1{
+        font-weight: 400;
+        font-size: 80px;
+    }
+
+    #ListaCertificadosMeio, .ListaCertificados{
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    #ContainerCertificados{
+        height: 2400px;
+    }
+
+    .ImgCertificados{
+        width: 400px;
+    }
+
+    #Certificados{
+        gap: 50px;
+    }
+
+    #ButtonCopiar{
+        font-size: 15px;
+        padding: 10px 5px;
+    }
+
+    #CopiarTexto input{
+        width: 250px;
+    }
+
+    #ContainerContato{
+        padding: 20px;
+    }
+
+    #TextContato{
+        text-align: center;
+    }
+}
+
+@media (max-width: 440px){
+
+    #SectionsMain h1{
+        font-size: 50px;
+    }
+
+    h2{
+        font-size: 40px;
+    }
+
+    #ImgMain{
+        width: 150px;
+    }
+
+    .CardsHabilidades{
+        width: 220px;
+    }
+
+    .CardsProjetos{
+        
+        width: 220px;
+        
+    }
+
+    .ImgCertificados{
+        width: 220px;
+    }
+
+    #ContainerCertificados{
+        height: 1700px;
+    }
+
+    #ImgContato{
+        width: 220px;
+    }
+
+    #CopiarTexto input{
+        width: 100px;
+    }
+    
+    
+}

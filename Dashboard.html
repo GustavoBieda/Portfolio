@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="Imagens/icon.png">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="Styles/styleDashboard.css">
+
+
+</head>
+<body data-theme="t-dark">
+
+    <!-- Modal -->
+
+    <div class="modal">
+        <div class="modalContent">
+            <i class="fa-solid buttonClose fa-xmark"></i>
+            <h3>Olá, Espero que Esteja Tudo Bem com Você!</h3><br>
+            <p>Antes de analizar essa página web, gostaria de informar que ele foi criado apenas como demostrativo das minhas habilidades, por esse motivo, nem tudo na página é
+                execútavel, apenas procurei demonstrar as partes mais importantes desse projeto.<br><br>
+                
+                Alguns dos itens que você podera testar, são os graficos iterativos, o layout totalmente responsivo e alteração do tema dark para o light, que pode ser alterado clicando no 
+                <i class="fa-regular fa-sun"></i> na parte superior direita da tela.<br><br>
+
+                Para executar esse projeto, foi utilizado a Biblioteca Chart.js para criar e animar o graficos, um pouco de JavaScript para criar um menu Hamburguer, mudar o tema da página e 
+                até mesmo esse Modal Pop-up, além de HTML e CSS.<br><br>
+
+                Pronto, agora você tem todas as informações sobre essa página, para visualizar a página clique no 'X' na parte superior desse modal, espero que goste!!
+            </p>
+        </div>
+    </div>
+
+    <!-- Navegação Lateral -->
+
+    <nav class="nav">
+        <div class="user">
+            <i class="fa-solid fa-user-astronaut"></i>
+            <h5>MyUser</h5>
+        </div>
+        <ul>
+            <li>Overview</li>
+            <li>Projects</li>
+        </ul>
+        <h6>Dashboard</h6>
+        <ul class="DecorationNone">
+            <li><i class="fa-regular fa-chart-bar"></i></i></i> Default</li>
+            <li><i class="fa-regular fa-folder-closed"></i> Projetos</li>
+            <li><i class="fa-regular fa-circle-play"></i></i> Cursos</li>
+        </ul>
+        <h6>Pages</h6>
+        <ul class="DecorationNone">
+            <li><i class="fa-regular fa-circle-user"></i></i> Usuarios</li>
+            <li><i class="fa-regular fa-address-card"></i></i> Conta</li>
+            <li><i class="fa-solid fa-users"></i> Membros</li>
+            <li><i class="fa-solid fa-share-nodes"></i></i></i> Social</li>
+        </ul>
+        
+    </nav>
+
+    <!-- Main -->
+
+    <main>
+
+        <!-- Cabeçalho -->
+
+        <header>
+            <div id="section1Header">
+                <div class="iconsSectionHeader">
+                    <a href="index.html" class="voltar">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <p> Voltar</p>
+                    </a>
+                    <i class="fa-solid ButtonMenu fa-bars"></i>
+                    <i class="fa-regular fa-heart"></i>
+                </div>
+                <h5>Dashboard</h5>
+            </div>
+
+            <div id="section2Header">
+                <div id="search">
+                    <input class="inputsearch" type="text" placeholder="Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <div class="iconsSectionHeader">
+                    <i class="fa-regular teme-js fa-sun"></i>
+                    <i class="fa-solid fa-rotate"></i>
+                    <i class="fa-regular fa-bell"></i>
+                </div>
+            </div>
+            
+        </header>
+        
+        <!-- Seções dos Gráficos -->
+
+        <section id="section1">
+
+            <div class="FlexWrap">
+                <div class="cardsSection1">
+                    <h4>Voos Com Tripulação</h4>
+                    <h2>334</h2>
+                </div>
+
+                <div class="cardsSection1">
+                    <h4>Número de Pessoas que já Foram ao Espaço</h4>
+                    <h2>566</h2>
+                </div>
+            </div>
+            
+            <div class="FlexWrap">
+                <div class="cardsSection1">
+                    <h4>Países que Já Enviaram Astronautas ao espaço</h4>
+                    <h2>39</h2>
+                </div>
+
+                <div class="cardsSection1">
+                    <h4>Número de Satélites em Órbita</h4>
+                    <h2>19.319</h2>
+                </div>
+            </div>
+
+        </section>
+        
+        <section id="section2">
+
+            <canvas id="cardGraphic">
+
+            </canvas>
+
+
+            <div id="cardProjetos">
+
+                <h3>Principais Missões de 2022</h3>  
+
+                <div class="missoesCardProjetos">
+                    <h4>Psyche</h4>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>   
+
+                <div class="missoesCardProjetos">
+                    <h4>Luna 25</h4>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div> 
+
+                <div class="missoesCardProjetos">
+                    <h4>DART</h4>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div> 
+
+                <div class="missoesCardProjetos">
+                    <h4>Artemis 1</h4>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div> 
+
+                <div class="missoesCardProjetos">
+                    <h4>Starship</h4>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div> 
+
+                <div class="missoesCardProjetos">
+                    <h4>JUICE</h4>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div> 
+
+                <div class="missoesCardProjetos">
+                    <h4>Estação Espacial CN</h4>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div> 
+
+            </div>
+
+        </section>
+        
+        <section id="section3">
+
+            <canvas id="cardInstitution">
+
+            </canvas>
+
+            <canvas id="cardCountries">
+
+            </canvas>
+
+        </section>
+
+    </main>
+
+    <!-- Informações á Direita da Página -->
+
+    <aside>
+        <h3>Astronautas Que Passaram Mais Tempo no espaço</h3>
+
+        <div class="listaAstronautas">
+            <img class="imgAstronautas" src="Imagens/ImgDashboard/MarkVandeHei.png" alt="Mark Vande Hei">
+            <h4>Mark Vande Hei</h4>
+        </div>
+        <p>Possui o maior tempo no espaço em uma única missão, 
+            tendo ficado 355 dias contínuos a bordo da Estação Espacial Internacional.
+        </p>
+        
+        <div class="listaAstronautas">
+            <img class="imgAstronautas" src="Imagens/ImgDashboard/Valery Poliyakov.png" alt="Valery Poliyakov">
+            <h4>Valery Poliyakov</h4>
+        </div>
+        <p>Cosmonauta russo, detém o recorde para maior tempo no espaço em uma 
+            única missão, um total de 437 dias a bordo da estação espacial Mir.</p>
+
+        <div class="listaAstronautas">
+            <img class="imgAstronautas" src="Imagens/ImgDashboard/Peggy Whitson.png" alt="Peggy Whitson">
+            <h4>Peggy Whitson</h4>
+        </div>
+        <p>Whitson ficou um total de 665 dias a bordo da estação espacial internacional, sendo a primeira mulher a comandar a ISS.</p>
+
+        <div class="listaAstronautas">
+            <img class="imgAstronautas" src="Imagens/ImgDashboard/Christina Koch.png" alt="Christina Koch">
+            <h4>Christina Koch</h4>
+        </div>
+        <p>Koch também tem o recorde de maior tempo no espaço em uma única expedição, com 328 dias passados no espaço.</p>
+
+        <div class="listaAstronautas">
+            <img class="imgAstronautas" src="Imagens/ImgDashboard/Gennady Padalka.png" alt="Gennady Padalka">
+            <h4>Gennady Padalka</h4>
+        </div>
+        <p>O cosmonauta russo detém o título de pessoa a ficar mais tempo no espaço. Ao totalizar todas suas missões, 879 dias nas estrelas, em cinco missões.</p>
+        
+    </aside>
+
+
+
+
+    <script src="https://kit.fontawesome.com/d40283d51f.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="Scripts/indexDashboard.js"></script>
+
+</body>
+</html>
