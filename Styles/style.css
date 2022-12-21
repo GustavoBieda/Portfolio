@@ -198,7 +198,7 @@ main{
 }
 
 #Planet2{
-    background-image: url(../Imagens/terra.png);
+    background-image: url(../Imagens/planet2.png);
     background-repeat: no-repeat;
     background-position-x: -50px;
     background-position-y: -50px;
@@ -207,7 +207,7 @@ main{
 }
 
 #Planet3{
-    background-image: url("https://i.postimg.cc/kXwKTNgq/planet3.png");
+    background-image: url(../Imagens/planet3.png);
     background-repeat: no-repeat;
     background-position-x: -50px;
     background-position-y: -50px;
