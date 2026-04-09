@@ -1,0 +1,1687 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>GUSTAVO_BIEDA // NEURAL_ARCHITECT_PROTOCOL</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23000'/%3E%3Cpath d='M17 14h18v7H24v8h10v7H24v8h11v7H17V14Zm23 0h9c8 0 13 5 13 12 0 4-2 8-6 10 4 2 6 6 6 10 0 8-5 13-13 13h-9V14Zm7 7v11h2c4 0 6-2 6-5s-2-6-6-6h-2Zm0 18v13h2c4 0 6-2 6-7 0-4-2-6-6-6h-2Z' fill='%239cff93'/%3E%3C/svg%3E" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#9cff93",
+                        "primary-container": "#00fc40",
+                        "primary-dim": "#00ec3b",
+                        "surface": "#0e0e0e",
+                        "surface-bright": "#2c2c2c",
+                        "surface-container": "#1a1919",
+                        "surface-container-low": "#131313",
+                        "surface-container-high": "#201f1f",
+                        "surface-container-highest": "#262626",
+                        "surface-container-lowest": "#000000",
+                        "surface-variant": "#262626",
+                        "on-surface": "#ffffff",
+                        "on-surface-variant": "#adaaaa",
+                        "on-primary": "#006413",
+                        "outline": "#777575",
+                        "outline-variant": "#494847",
+                        "secondary": "#d8e8c5",
+                        "secondary-dim": "#cadab7",
+                        "secondary-container": "#3d4b31",
+                        "tertiary": "#8af2ff",
+                        "tertiary-dim": "#00dbec",
+                        "tertiary-container": "#0eeafd",
+                        "on-tertiary": "#005b63",
+                        "error": "#ff7351",
+                        "error-dim": "#d53d18",
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Space Grotesk", "sans-serif"],
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            cursor: none;
+        }
+
+        * { cursor: none; }
+
+        .font-space-grotesk { font-family: 'Space Grotesk', sans-serif; }
+        .font-jetbrains { font-family: 'JetBrains Mono', monospace; }
+
+        /* Custom cursor */
+        .custom-cursor {
+            pointer-events: none;
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #9cff93;
+            border-radius: 50%;
+            z-index: 99999;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, border-color 0.2s, background-color 0.2s;
+        }
+
+        .custom-cursor.hover {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(156, 255, 147, 0.1);
+            border-color: #00fc40;
+        }
+
+        .cursor-dot {
+            pointer-events: none;
+            position: fixed;
+            width: 5px;
+            height: 5px;
+            background-color: #9cff93;
+            border-radius: 50%;
+            z-index: 99999;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Cursor Aura */
+        .cursor-aura {
+            pointer-events: none;
+            background: radial-gradient(circle, rgba(156, 255, 147, 0.06) 0%, transparent 70%);
+            width: 500px;
+            height: 500px;
+            position: fixed;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        /* Grid Overlay */
+        .bg-grid {
+            background-image:
+                linear-gradient(rgba(73, 72, 71, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(73, 72, 71, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* Particles canvas */
+        #particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        /* Typewriter cursor blink */
+        .typewriter-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.1em;
+            background-color: #9cff93;
+            margin-left: 4px;
+            animation: blink 0.7s infinite;
+            vertical-align: text-bottom;
+        }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Connection lines animation */
+        .connection-line {
+            stroke-dasharray: 10 6;
+            animation: dash 20s linear infinite;
+        }
+        @keyframes dash {
+            to { stroke-dashoffset: -1000; }
+        }
+
+        /* Node pulse */
+        .node-pulse {
+            animation: nodePulse 3s ease-in-out infinite;
+        }
+        @keyframes nodePulse {
+            0%, 100% { box-shadow: 0 0 15px -5px rgba(156, 255, 147, 0.1); }
+            50% { box-shadow: 0 0 25px -3px rgba(156, 255, 147, 0.2); }
+        }
+
+        /* Core node pulse */
+        .core-pulse {
+            animation: corePulse 2s ease-in-out infinite;
+        }
+        @keyframes corePulse {
+            0%, 100% { box-shadow: 0 0 20px -5px rgba(156, 255, 147, 0.2); }
+            50% { box-shadow: 0 0 40px -5px rgba(156, 255, 147, 0.4); }
+        }
+
+        .n8n-node-shadow {
+            box-shadow: 0 0 20px -5px rgba(156, 255, 147, 0.08);
+            transition: all 0.3s ease;
+        }
+        .n8n-node-shadow:hover {
+            box-shadow: 0 0 35px -5px rgba(156, 255, 147, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* Scroll fade-in */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Skill bar animation */
+        .skill-bar-fill {
+            width: 0;
+            transition: width 1.2s ease-out;
+        }
+        .skill-bar-fill.animated {
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .modal-content {
+            transform: translateY(30px) scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+
+        /* Nav indicator */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #9cff93;
+            transition: width 0.3s ease;
+        }
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Glow text */
+        .text-glow {
+            text-shadow: 0 0 20px rgba(156, 255, 147, 0.3);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #494847; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #9cff93; }
+
+        /* Mobile menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        /* Tool card hover glow */
+        .tool-card:hover {
+            border-color: rgba(156, 255, 147, 0.3);
+            box-shadow: 0 0 20px rgba(156, 255, 147, 0.1);
+        }
+
+        /* Sub-node in canvas */
+        .sub-node {
+            transition: all 0.3s ease;
+        }
+        .sub-node:hover {
+            border-color: rgba(156, 255, 147, 0.5) !important;
+            box-shadow: 0 0 25px rgba(156, 255, 147, 0.2);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Project image gallery */
+        .project-gallery {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scroll-snap-type: x mandatory;
+        }
+        .project-gallery::-webkit-scrollbar { height: 3px; }
+        .project-gallery::-webkit-scrollbar-track { background: #1a1919; }
+        .project-gallery::-webkit-scrollbar-thumb { background: #9cff93; border-radius: 2px; }
+        .project-gallery img {
+            scroll-snap-align: start;
+            flex-shrink: 0;
+            width: 100%;
+            max-height: 220px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 1px solid rgba(73,72,71,0.2);
+            cursor: zoom-in;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        .project-gallery img:hover {
+            border-color: rgba(156, 255, 147, 0.4);
+            transform: scale(1.01);
+        }
+        .project-gallery.multi img {
+            width: calc(80% - 4px);
+        }
+
+        /* Node thumb preview */
+        .node-thumb {
+            width: 100%;
+            height: 52px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid rgba(73,72,71,0.15);
+            margin-top: 2px;
+        }
+
+        /* Cert lightbox */
+        .cert-lightbox {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .cert-lightbox.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .cert-lightbox-inner {
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            max-width: 900px;
+            width: 95vw;
+            max-height: 90vh;
+        }
+        .cert-lightbox.active .cert-lightbox-inner {
+            transform: scale(1);
+        }
+        .cert-lightbox img {
+            max-height: 75vh;
+            object-fit: contain;
+            border-radius: 10px;
+            border: 1px solid rgba(156, 255, 147, 0.15);
+        }
+        .cert-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            height: 300px;
+            border: 2px dashed rgba(73,72,71,0.4);
+            border-radius: 10px;
+            color: #adaaaa;
+        }
+
+        /* Cert card clickable */
+        .cert-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="selection:bg-primary selection:text-on-primary overflow-x-hidden">
+
+    <!-- Grid Background Layer -->
+    <div class="fixed inset-0 bg-grid z-0"></div>
+
+    <!-- Cursor Elements -->
+    <div class="cursor-aura hidden lg:block" id="aura"></div>
+    <div class="custom-cursor hidden lg:block" id="customCursor"></div>
+    <div class="cursor-dot hidden lg:block" id="cursorDot"></div>
+
+    <!-- TopNavBar -->
+    <header class="bg-[#0a0a0a]/70 backdrop-blur-xl border-b border-[#494847]/15 font-jetbrains tracking-tighter fixed top-0 w-full z-50">
+        <div class="flex justify-between items-center w-full px-6 py-4 max-w-full">
+            <div class="text-lg font-bold tracking-[0.2em] text-primary uppercase">
+                <span class="text-on-surface-variant">&gt;_</span> BIEDA<span class="text-primary-dim">.SYS</span>
+            </div>
+            <nav class="hidden md:flex gap-8 items-center text-xs tracking-widest uppercase">
+                <a class="nav-link text-on-surface-variant hover:text-primary transition-colors py-1" href="#hero" data-section="hero">Início</a>
+                <a class="nav-link text-on-surface-variant hover:text-primary transition-colors py-1" href="#about" data-section="about">About</a>
+                <a class="nav-link text-on-surface-variant hover:text-primary transition-colors py-1" href="#skills" data-section="skills">Skills</a>
+                <a class="nav-link text-on-surface-variant hover:text-primary transition-colors py-1" href="#projects" data-section="projects">Projetos</a>
+                <a class="nav-link text-on-surface-variant hover:text-primary transition-colors py-1" href="#tools" data-section="tools">Stack</a>
+                <a class="nav-link text-on-surface-variant hover:text-primary transition-colors py-1" href="#certs" data-section="certs">Certs</a>
+                <a class="nav-link text-on-surface-variant hover:text-primary transition-colors py-1" href="#contact" data-section="contact">Contato</a>
+            </nav>
+            <button class="md:hidden text-primary text-2xl" id="menuBtn" aria-label="Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu fixed top-0 right-0 h-full w-72 bg-[#0a0a0a]/95 backdrop-blur-xl border-l border-outline-variant/15 z-[60] flex flex-col p-8 pt-20 gap-6 font-jetbrains text-sm tracking-widest uppercase" id="mobileMenu">
+        <button class="absolute top-6 right-6 text-primary text-xl" id="closeMenuBtn" aria-label="Fechar">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <a class="text-on-surface-variant hover:text-primary transition-colors" href="#hero" onclick="closeMobile()">Início</a>
+        <a class="text-on-surface-variant hover:text-primary transition-colors" href="#about" onclick="closeMobile()">About</a>
+        <a class="text-on-surface-variant hover:text-primary transition-colors" href="#skills" onclick="closeMobile()">Skills</a>
+        <a class="text-on-surface-variant hover:text-primary transition-colors" href="#projects" onclick="closeMobile()">Projetos</a>
+        <a class="text-on-surface-variant hover:text-primary transition-colors" href="#tools" onclick="closeMobile()">Stack</a>
+        <a class="text-on-surface-variant hover:text-primary transition-colors" href="#certs" onclick="closeMobile()">Certs</a>
+        <a class="text-on-surface-variant hover:text-primary transition-colors" href="#contact" onclick="closeMobile()">Contato</a>
+    </div>
+
+    <main class="relative z-10 pt-20">
+
+        <!-- ═══════════════════════ HERO SECTION ═══════════════════════ -->
+        <section class="min-h-screen flex flex-col justify-center px-6 md:px-[10%] relative overflow-hidden" id="hero">
+            <canvas id="particles-canvas"></canvas>
+            <div class="relative z-10 flex flex-col gap-3 mb-6">
+                <span class="font-jetbrains text-primary text-xs tracking-[0.3em] uppercase opacity-80">
+                    <i class="fa-solid fa-signal text-[10px] mr-2"></i>Status: Online // Curitiba, PR
+                </span>
+                <h1 class="text-5xl sm:text-6xl md:text-8xl font-headline font-bold text-on-surface tracking-tighter leading-[0.9]">
+                    GUSTAVO<br/><span class="text-primary text-glow">BIEDA</span>
+                </h1>
+                <div class="text-lg sm:text-xl md:text-2xl font-jetbrains text-secondary-dim tracking-tight mt-2 h-10">
+                    <span id="typewriter"></span><span class="typewriter-cursor"></span>
+                </div>
+            </div>
+            <div class="relative z-10 flex flex-col gap-8 max-w-3xl">
+                <div class="p-5 bg-surface-container-low/60 border border-outline-variant/10 rounded-lg backdrop-blur-sm">
+                    <p class="text-on-surface-variant font-body leading-relaxed text-base italic">
+                        "Engenhando arquiteturas cognitivas que conectam intenção humana à execução de máquinas. Convertendo complexidade em eficiência operacional autônoma."
+                    </p>
+                </div>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#projects" class="bg-primary text-on-primary px-8 py-4 rounded font-jetbrains font-bold text-xs tracking-widest hover:bg-primary-container hover:shadow-[0_0_30px_rgba(156,255,147,0.3)] transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-terminal text-sm"></i>
+                        VER_PROJETOS
+                    </a>
+                    <a href="#about" class="border border-outline/20 text-primary px-8 py-4 rounded font-jetbrains font-bold text-xs tracking-widest hover:bg-surface-bright transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-file-lines text-sm"></i>
+                        SOBRE_MIM
+                    </a>
+                </div>
+            </div>
+            <!-- Scroll indicator -->
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40 animate-bounce">
+                <span class="font-jetbrains text-[10px] text-on-surface-variant tracking-widest uppercase">Scroll</span>
+                <i class="fa-solid fa-chevron-down text-primary text-sm"></i>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════ ABOUT SECTION ═══════════════════════ -->
+        <section class="py-24 px-6 md:px-[10%]" id="about">
+            <div class="max-w-5xl mx-auto reveal">
+                <span class="font-jetbrains text-primary text-xs tracking-[0.4em] uppercase">Section 01 // Professional Summary</span>
+                <h2 class="text-4xl md:text-5xl font-headline font-bold text-on-surface mt-2 mb-10 tracking-tight">ABOUT_ME</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                    <div class="lg:col-span-2 space-y-5">
+                        <p class="text-on-surface-variant font-body leading-relaxed text-lg">
+                            Profissional de tecnologia com expertise em <span class="text-primary font-semibold">Inteligência Artificial</span>, automação empresarial e arquitetura de soluções digitais. Atuo como <span class="text-primary font-semibold">Head of Technology</span>, liderando a transformação digital através de agentes inteligentes, workflows automatizados e integrações de APIs.
+                        </p>
+                        <p class="text-on-surface-variant font-body leading-relaxed">
+                            Minha abordagem combina visão estratégica com execução técnica — do desenho de soluções com IA generativa (OpenAI, Anthropic) até a implementação de pipelines end-to-end com n8n, Make e Python. Foco constante em escalabilidade, eficiência e resultados mensuráveis.
+                        </p>
+                        <p class="text-on-surface-variant font-body leading-relaxed">
+                            Com background em engenharia de dados e CRM, desenvolvo ecossistemas que conectam marketing, vendas e operações em uma única camada de inteligência automatizada.
+                        </p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-surface-container border border-outline-variant/10 rounded-lg">
+                            <span class="text-[10px] font-jetbrains text-primary tracking-widest uppercase">Localização</span>
+                            <p class="text-on-surface font-medium mt-1"><i class="fa-solid fa-location-dot text-primary mr-2 text-sm"></i>Curitiba, PR — Brasil</p>
+                        </div>
+                        <div class="p-4 bg-surface-container border border-outline-variant/10 rounded-lg">
+                            <span class="text-[10px] font-jetbrains text-primary tracking-widest uppercase">Cargo Atual</span>
+                            <p class="text-on-surface font-medium mt-1"><i class="fa-solid fa-briefcase text-primary mr-2 text-sm"></i>Head of Technology</p>
+                        </div>
+                        <div class="p-4 bg-surface-container border border-outline-variant/10 rounded-lg">
+                            <span class="text-[10px] font-jetbrains text-primary tracking-widest uppercase">Especialidade</span>
+                            <p class="text-on-surface font-medium mt-1"><i class="fa-solid fa-brain text-primary mr-2 text-sm"></i>AI Solutions Architect</p>
+                        </div>
+                        <div class="p-4 bg-surface-container border border-outline-variant/10 rounded-lg">
+                            <span class="text-[10px] font-jetbrains text-primary tracking-widest uppercase">Disponibilidade</span>
+                            <p class="text-on-surface font-medium mt-1"><i class="fa-solid fa-circle text-green-400 mr-2 text-[8px] animate-pulse"></i>Disponível para projetos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════ SKILLS SECTION ═══════════════════════ -->
+        <section class="py-24 px-6 md:px-[10%] bg-surface-container-low/50" id="skills">
+            <div class="max-w-5xl mx-auto reveal">
+                <span class="font-jetbrains text-primary text-xs tracking-[0.4em] uppercase">Section 02 // Competências</span>
+                <h2 class="text-4xl md:text-5xl font-headline font-bold text-on-surface mt-2 mb-12 tracking-tight">SKILL_MATRIX</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <!-- AI & Machine Learning -->
+                    <div class="space-y-4">
+                        <h3 class="font-jetbrains text-primary text-sm tracking-widest uppercase flex items-center gap-2">
+                            <i class="fa-solid fa-brain"></i> AI & Machine Learning
+                        </h3>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1"><span class="text-on-surface-variant">Prompt Engineering</span><span class="text-primary font-jetbrains text-xs">95%</span></div>
+                                <div class="h-2 bg-surface-container-highest rounded-full overflow-hidden"><div class="skill-bar-fill h-full bg-gradient-to-r from-primary/80 to-primary rounded-full" data-width="95"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1"><span class="text-on-surface-variant">OpenAI API / GPT</span><span class="text-primary font-jetbrains text-xs">92%</span></div>
+                                <div class="h-2 bg-surface-container-highest rounded-full overflow-hidden"><div class="skill-bar-fill h-full bg-gradient-to-r from-primary/80 to-primary rounded-full" data-width="92"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1"><span class="text-on-surface-variant">Anthropic / Claude API</span><span class="text-primary font-jetbrains text-xs">90%</span></div>
+                                <div class="h-2 bg-surface-container-highest rounded-full overflow-hidden"><div class="skill-bar-fill h-full bg-gradient-to-r from-primary/80 to-primary rounded-full" data-width="90"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1"><span class="text-on-surface-variant">AI Agents Development</span><span class="text-primary font-jetbrains text-xs">88%</span></div>
+                                <div class="h-2 bg-surface-container-highest rounded-full overflow-hidden"><div class="skill-bar-fill h-full bg-gradient-to-r from-primary/80 to-primary rounded-full" data-width="88"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Automation -->
+                    <div class="space-y-4">
+                        <h3 class="font-jetbrains text-tertiary text-sm tracking-widest uppercase flex items-center gap-2">
+                            <i class="fa-solid fa-gears"></i> Automação & Integração
+                        </h3>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1"><span class="text-on-surface-variant">n8n Workflows</span><span class="text-tertiary font-jetbrains text-xs">95%</span></div>
+                                <div class="h-2 bg-surface-container-highest rounded-full overflow-hidden"><div class="skill-bar-fill h-full bg-gradient-to-r from-tertiary/80 to-tertiary rounded-full" data-width="95"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1"><span class="text-on-surface-variant">Make (Integromat)</span><span class="text-tertiary font-jetbrains text-xs">90%</span></div>
+                                <div class="h-2 bg-surface-container-highest rounded-full overflow-hidden"><div class="skill-bar-fill h-full bg-gradient-to-r from-tertiary/80 to-tertiary rounded-full" data-width="90"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1"><span class="text-on-surface-variant">API Integration</span><span class="text-tertiary font-jetbrains text-xs">93%</span></div>
+                                <div class="h-2 bg-surface-container-highest rounded-full overflow-hidden"><div class="skill-bar-fill h-full bg-gradient-to-r from-tertiary/80 to-tertiary rounded-full" data-width="93"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1"><span class="text-on-surface-variant">Python Scripting</span><span class="text-tertiary font-jetbrains text-xs">85%</span></div>
+                                <div class="h-2 bg-surface-container-highest rounded-full overflow-hidden"><div class="skill-bar-fill h-full bg-gradient-to-r from-tertiary/80 to-tertiary rounded-full" data-width="85"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Data & Analytics -->
+                    <div class="space-y-4">
+                        <h3 class="font-jetbrains text-secondary-dim text-sm tracking-widest uppercase flex items-center gap-2">
+                            <i class="fa-solid fa-chart-line"></i> Data & Analytics
+                        </h3>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1"><span class="text-on-surface-variant">Power BI</span><span class="text-secondary-dim font-jetbrains text-xs">88%</span></div>
+                                <div class="h-2 bg-surface-container-highest rounded-full overflow-hidden"><div class="skill-bar-fill h-full bg-gradient-to-r from-secondary-dim/80 to-secondary-dim rounded-full" data-width="88"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1"><span class="text-on-surface-variant">Supabase / PostgreSQL</span><span class="text-secondary-dim font-jetbrains text-xs">85%</span></div>
+                                <div class="h-2 bg-surface-container-highest rounded-full overflow-hidden"><div class="skill-bar-fill h-full bg-gradient-to-r from-secondary-dim/80 to-secondary-dim rounded-full" data-width="85"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1"><span class="text-on-surface-variant">Data Pipeline Design</span><span class="text-secondary-dim font-jetbrains text-xs">82%</span></div>
+                                <div class="h-2 bg-surface-container-highest rounded-full overflow-hidden"><div class="skill-bar-fill h-full bg-gradient-to-r from-secondary-dim/80 to-secondary-dim rounded-full" data-width="82"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Infrastructure -->
+                    <div class="space-y-4">
+                        <h3 class="font-jetbrains text-error text-sm tracking-widest uppercase flex items-center gap-2">
+                            <i class="fa-solid fa-server"></i> Infraestrutura & CRM
+                        </h3>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1"><span class="text-on-surface-variant">Docker & DevOps</span><span class="text-error font-jetbrains text-xs">80%</span></div>
+                                <div class="h-2 bg-surface-container-highest rounded-full overflow-hidden"><div class="skill-bar-fill h-full bg-gradient-to-r from-error/80 to-error rounded-full" data-width="80"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1"><span class="text-on-surface-variant">RD Station / Bitrix</span><span class="text-error font-jetbrains text-xs">87%</span></div>
+                                <div class="h-2 bg-surface-container-highest rounded-full overflow-hidden"><div class="skill-bar-fill h-full bg-gradient-to-r from-error/80 to-error rounded-full" data-width="87"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1"><span class="text-on-surface-variant">Cloud Architecture</span><span class="text-error font-jetbrains text-xs">78%</span></div>
+                                <div class="h-2 bg-surface-container-highest rounded-full overflow-hidden"><div class="skill-bar-fill h-full bg-gradient-to-r from-error/80 to-error rounded-full" data-width="78"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════ PROJECTS CANVAS (n8n Style) ═══════════════════════ -->
+        <section class="py-24 px-6 md:px-[5%] relative" id="projects">
+            <div class="mb-16 text-center reveal">
+                <span class="font-jetbrains text-primary text-xs tracking-[0.4em] uppercase">Section 03 // Operation Matrix</span>
+                <h2 class="text-4xl md:text-5xl font-headline font-bold text-on-surface mt-2">PROJECT_FLOW_CANVAS</h2>
+                <p class="text-on-surface-variant mt-3 max-w-xl mx-auto text-sm">Clique em qualquer nó para ver detalhes do projeto</p>
+            </div>
+
+            <div class="relative w-full max-w-7xl mx-auto reveal" style="min-height: 700px;">
+                <!-- SVG Connections -->
+                <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" id="canvasSvg" preserveAspectRatio="none">
+                    <!-- Lines will be drawn by JS -->
+                </svg>
+
+                <!-- CANVAS GRID -->
+                <div class="relative w-full grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-4" id="canvasGrid">
+
+                    <!-- Column 1: Agentes IA -->
+                    <div class="flex flex-col gap-4 items-center md:col-span-1">
+                        <div class="font-jetbrains text-[10px] tracking-widest text-tertiary uppercase mb-2"><i class="fa-solid fa-robot mr-1"></i> Agentes IA</div>
+
+                        <div class="sub-node node-pulse bg-surface-container-high border border-outline-variant/20 rounded-xl p-4 w-full max-w-[200px] flex flex-col items-center gap-2 cursor-pointer"
+                             data-project="sdr" onclick="openModal('sdr')">
+                            <div class="w-10 h-10 rounded-lg bg-tertiary/15 flex items-center justify-center">
+                                <i class="fa-solid fa-chart-column text-tertiary"></i>
+                            </div>
+                            <span class="font-jetbrains text-[10px] font-bold text-on-surface tracking-wider text-center">SDR de Atendimento</span>
+                            <span class="text-[9px] text-on-surface-variant">n8n + OpenAI</span>
+                        </div>
+
+                        <div class="sub-node node-pulse bg-surface-container-high border border-outline-variant/20 rounded-xl p-4 w-full max-w-[200px] flex flex-col items-center gap-2 cursor-pointer"
+                             data-project="followup" onclick="openModal('followup')">
+                            <div class="w-10 h-10 rounded-lg bg-tertiary/15 flex items-center justify-center">
+                                <i class="fa-solid fa-arrows-rotate text-tertiary"></i>
+                            </div>
+                            <span class="font-jetbrains text-[10px] font-bold text-on-surface tracking-wider text-center">Sistema de Follow-up</span>
+                            <span class="text-[9px] text-on-surface-variant">n8n + WhatsApp</span>
+                        </div>
+
+                        <div class="sub-node node-pulse bg-surface-container-high border border-outline-variant/20 rounded-xl p-4 w-full max-w-[200px] flex flex-col items-center gap-2 cursor-pointer"
+                             data-project="integracao" onclick="openModal('integracao')">
+                            <div class="w-10 h-10 rounded-lg bg-tertiary/15 flex items-center justify-center">
+                                <i class="fa-solid fa-link text-tertiary"></i>
+                            </div>
+                            <span class="font-jetbrains text-[10px] font-bold text-on-surface tracking-wider text-center">Integração Bitrix/RD</span>
+                            <span class="text-[9px] text-on-surface-variant">n8n + CRM</span>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Connector to center -->
+                    <div class="hidden md:flex flex-col items-center justify-center">
+                        <div class="w-full border-t border-dashed border-primary/20"></div>
+                    </div>
+
+                    <!-- Column 3: Core Node (Center) -->
+                    <div class="flex flex-col items-center justify-center md:col-span-1">
+                        <div class="core-pulse bg-surface-bright border-2 border-primary/50 rounded-2xl p-6 w-full max-w-[220px] flex flex-col items-center gap-3 relative">
+                            <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-on-primary font-jetbrains text-[8px] px-3 py-1 rounded-full tracking-widest font-bold">CORE SYSTEM</div>
+                            <div class="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center mt-2">
+                                <i class="fa-solid fa-microchip text-primary text-2xl"></i>
+                            </div>
+                            <span class="font-jetbrains text-xs font-bold text-on-surface tracking-widest text-center">AI_ORCHESTRATOR</span>
+                            <span class="text-[9px] text-on-surface-variant text-center">Hub central de todos os projetos e automações</span>
+                            <div class="flex gap-1 mt-1">
+                                <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                                <span class="w-2 h-2 rounded-full bg-primary animate-pulse" style="animation-delay: 0.3s"></span>
+                                <span class="w-2 h-2 rounded-full bg-primary animate-pulse" style="animation-delay: 0.6s"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 4: Connector to right -->
+                    <div class="hidden md:flex flex-col items-center justify-center">
+                        <div class="w-full border-t border-dashed border-primary/20"></div>
+                    </div>
+
+                    <!-- Column 5: Agentes Inteligentes -->
+                    <div class="flex flex-col gap-4 items-center md:col-span-1">
+                        <div class="font-jetbrains text-[10px] tracking-widest text-secondary-dim uppercase mb-2"><i class="fa-solid fa-brain mr-1"></i> Agentes Inteligentes</div>
+
+                        <div class="sub-node node-pulse bg-surface-container-high border border-outline-variant/20 rounded-xl p-4 w-full max-w-[200px] flex flex-col items-center gap-2 cursor-pointer"
+                             data-project="agente_atend" onclick="openModal('agente_atend')">
+                            <div class="w-10 h-10 rounded-lg bg-secondary-dim/15 flex items-center justify-center">
+                                <i class="fa-solid fa-headset text-secondary-dim"></i>
+                            </div>
+                            <span class="font-jetbrains text-[10px] font-bold text-on-surface tracking-wider text-center">Agente de Atendimento</span>
+                            <span class="text-[9px] text-on-surface-variant">GPT-4.1 + WhatsApp</span>
+                        </div>
+
+                        <div class="sub-node node-pulse bg-surface-container-high border border-outline-variant/20 rounded-xl p-4 w-full max-w-[200px] flex flex-col items-center gap-2 cursor-pointer"
+                             data-project="agente_agenda" onclick="openModal('agente_agenda')">
+                            <div class="w-10 h-10 rounded-lg bg-secondary-dim/15 flex items-center justify-center">
+                                <i class="fa-solid fa-calendar-check text-secondary-dim"></i>
+                            </div>
+                            <span class="font-jetbrains text-[10px] font-bold text-on-surface tracking-wider text-center">Agente de Agendamento</span>
+                            <span class="text-[9px] text-on-surface-variant">n8n + Calendar</span>
+                        </div>
+
+                        <div class="sub-node node-pulse bg-surface-container-high border border-outline-variant/20 rounded-xl p-4 w-full max-w-[200px] flex flex-col items-center gap-2 cursor-pointer"
+                             data-project="analise_reunioes" onclick="openModal('analise_reunioes')">
+                            <div class="w-10 h-10 rounded-lg bg-secondary-dim/15 flex items-center justify-center">
+                                <i class="fa-solid fa-microphone text-secondary-dim"></i>
+                            </div>
+                            <span class="font-jetbrains text-[10px] font-bold text-on-surface tracking-wider text-center">Análise de Reuniões</span>
+                            <span class="text-[9px] text-on-surface-variant">OpenAI + Meet</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Second Row: Dashboards & Sites -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+                    <!-- Dashboards & Analytics -->
+                    <div class="flex flex-col items-center gap-4">
+                        <div class="font-jetbrains text-[10px] tracking-widest text-primary uppercase mb-1"><i class="fa-solid fa-chart-pie mr-1"></i> Dashboards & Analytics</div>
+                        <div class="grid grid-cols-2 gap-3 w-full max-w-md">
+                            <div class="sub-node node-pulse bg-surface-container-high border border-outline-variant/20 rounded-xl p-4 flex flex-col items-center gap-2 cursor-pointer"
+                                 data-project="dash_vendas" onclick="openModal('dash_vendas')">
+                                <div class="w-9 h-9 rounded-lg bg-primary/15 flex items-center justify-center">
+                                    <i class="fa-solid fa-chart-bar text-primary text-sm"></i>
+                                </div>
+                                <span class="font-jetbrains text-[9px] font-bold text-on-surface tracking-wider text-center">Dashboard Vendas</span>
+                            </div>
+                            <div class="sub-node node-pulse bg-surface-container-high border border-outline-variant/20 rounded-xl p-4 flex flex-col items-center gap-2 cursor-pointer"
+                                 data-project="dash_marketing" onclick="openModal('dash_marketing')">
+                                <div class="w-9 h-9 rounded-lg bg-primary/15 flex items-center justify-center">
+                                    <i class="fa-solid fa-bullhorn text-primary text-sm"></i>
+                                </div>
+                                <span class="font-jetbrains text-[9px] font-bold text-on-surface tracking-wider text-center">Dashboard Marketing</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sites & Desenvolvimento Web -->
+                    <div class="flex flex-col items-center gap-4">
+                        <div class="font-jetbrains text-[10px] tracking-widest text-error uppercase mb-1"><i class="fa-solid fa-code mr-1"></i> Sites & Desenvolvimento</div>
+                        <div class="grid grid-cols-2 gap-3 w-full max-w-md">
+                            <div class="sub-node node-pulse bg-surface-container-high border border-outline-variant/20 rounded-xl p-4 flex flex-col items-center gap-2 cursor-pointer"
+                                 data-project="milenia" onclick="openModal('milenia')">
+                                <div class="w-9 h-9 rounded-lg bg-error/15 flex items-center justify-center">
+                                    <i class="fa-solid fa-globe text-error text-sm"></i>
+                                </div>
+                                <span class="font-jetbrains text-[9px] font-bold text-on-surface tracking-wider text-center">Milen-ia.com</span>
+                            </div>
+                            <div class="sub-node node-pulse bg-surface-container-high border border-outline-variant/20 rounded-xl p-4 flex flex-col items-center gap-2 cursor-pointer"
+                                 data-project="blog_auto" onclick="openModal('blog_auto')">
+                                <div class="w-9 h-9 rounded-lg bg-error/15 flex items-center justify-center">
+                                    <i class="fa-solid fa-pen-nib text-error text-sm"></i>
+                                </div>
+                                <span class="font-jetbrains text-[9px] font-bold text-on-surface tracking-wider text-center">Blog Automático</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════ TOOLS & STACK SECTION ═══════════════════════ -->
+        <section class="py-24 bg-surface-container-low/50 px-6 md:px-[10%]" id="tools">
+            <div class="max-w-6xl mx-auto reveal">
+                <div class="mb-12">
+                    <span class="font-jetbrains text-primary text-xs tracking-[0.4em] uppercase">Section 04 // Tech Stack</span>
+                    <h2 class="text-4xl md:text-5xl font-headline font-bold text-on-surface mt-2 tracking-tight">ENGINEERED_TOOLSET</h2>
+                    <p class="text-on-surface-variant mt-3 max-w-2xl">Ferramentas e plataformas que compõem meu ecossistema tecnológico para entregar soluções de alta performance.</p>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    <!-- n8n -->
+                    <div class="tool-card aspect-square bg-surface border border-outline-variant/10 rounded-xl flex flex-col items-center justify-center gap-3 hover:bg-surface-bright transition-all group p-4">
+                        <div class="w-12 h-12 bg-[#ea4b71]/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <span class="text-[#ea4b71] font-jetbrains font-bold text-lg">n8n</span>
+                        </div>
+                        <span class="text-on-surface-variant group-hover:text-primary font-jetbrains font-bold text-[10px] tracking-wider">N8N</span>
+                    </div>
+                    <!-- Make -->
+                    <div class="tool-card aspect-square bg-surface border border-outline-variant/10 rounded-xl flex flex-col items-center justify-center gap-3 hover:bg-surface-bright transition-all group p-4">
+                        <div class="w-12 h-12 bg-[#6d4aff]/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-wand-magic-sparkles text-[#6d4aff] text-xl"></i>
+                        </div>
+                        <span class="text-on-surface-variant group-hover:text-primary font-jetbrains font-bold text-[10px] tracking-wider">MAKE</span>
+                    </div>
+                    <!-- OpenAI -->
+                    <div class="tool-card aspect-square bg-surface border border-outline-variant/10 rounded-xl flex flex-col items-center justify-center gap-3 hover:bg-surface-bright transition-all group p-4">
+                        <div class="w-12 h-12 bg-[#10a37f]/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-robot text-[#10a37f] text-xl"></i>
+                        </div>
+                        <span class="text-on-surface-variant group-hover:text-primary font-jetbrains font-bold text-[10px] tracking-wider">OPENAI</span>
+                    </div>
+                    <!-- Anthropic -->
+                    <div class="tool-card aspect-square bg-surface border border-outline-variant/10 rounded-xl flex flex-col items-center justify-center gap-3 hover:bg-surface-bright transition-all group p-4">
+                        <div class="w-12 h-12 bg-[#d4a574]/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-atom text-[#d4a574] text-xl"></i>
+                        </div>
+                        <span class="text-on-surface-variant group-hover:text-primary font-jetbrains font-bold text-[10px] tracking-wider">ANTHROPIC</span>
+                    </div>
+                    <!-- Python -->
+                    <div class="tool-card aspect-square bg-surface border border-outline-variant/10 rounded-xl flex flex-col items-center justify-center gap-3 hover:bg-surface-bright transition-all group p-4">
+                        <div class="w-12 h-12 bg-[#3776AB]/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-python text-[#3776AB] text-xl"></i>
+                        </div>
+                        <span class="text-on-surface-variant group-hover:text-primary font-jetbrains font-bold text-[10px] tracking-wider">PYTHON</span>
+                    </div>
+                    <!-- Supabase -->
+                    <div class="tool-card aspect-square bg-surface border border-outline-variant/10 rounded-xl flex flex-col items-center justify-center gap-3 hover:bg-surface-bright transition-all group p-4">
+                        <div class="w-12 h-12 bg-[#3ECF8E]/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-database text-[#3ECF8E] text-xl"></i>
+                        </div>
+                        <span class="text-on-surface-variant group-hover:text-primary font-jetbrains font-bold text-[10px] tracking-wider">SUPABASE</span>
+                    </div>
+                    <!-- Docker -->
+                    <div class="tool-card aspect-square bg-surface border border-outline-variant/10 rounded-xl flex flex-col items-center justify-center gap-3 hover:bg-surface-bright transition-all group p-4">
+                        <div class="w-12 h-12 bg-[#2496ED]/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-docker text-[#2496ED] text-xl"></i>
+                        </div>
+                        <span class="text-on-surface-variant group-hover:text-primary font-jetbrains font-bold text-[10px] tracking-wider">DOCKER</span>
+                    </div>
+                    <!-- Power BI -->
+                    <div class="tool-card aspect-square bg-surface border border-outline-variant/10 rounded-xl flex flex-col items-center justify-center gap-3 hover:bg-surface-bright transition-all group p-4">
+                        <div class="w-12 h-12 bg-[#F2C811]/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-chart-column text-[#F2C811] text-xl"></i>
+                        </div>
+                        <span class="text-on-surface-variant group-hover:text-primary font-jetbrains font-bold text-[10px] tracking-wider">POWER BI</span>
+                    </div>
+                    <!-- RD Station -->
+                    <div class="tool-card aspect-square bg-surface border border-outline-variant/10 rounded-xl flex flex-col items-center justify-center gap-3 hover:bg-surface-bright transition-all group p-4">
+                        <div class="w-12 h-12 bg-[#00b5ad]/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-bullseye text-[#00b5ad] text-xl"></i>
+                        </div>
+                        <span class="text-on-surface-variant group-hover:text-primary font-jetbrains font-bold text-[10px] tracking-wider">RD STATION</span>
+                    </div>
+                    <!-- Bitrix -->
+                    <div class="tool-card aspect-square bg-surface border border-outline-variant/10 rounded-xl flex flex-col items-center justify-center gap-3 hover:bg-surface-bright transition-all group p-4">
+                        <div class="w-12 h-12 bg-[#2FC6F6]/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-building text-[#2FC6F6] text-xl"></i>
+                        </div>
+                        <span class="text-on-surface-variant group-hover:text-primary font-jetbrains font-bold text-[10px] tracking-wider">BITRIX24</span>
+                    </div>
+                </div>
+
+                <!-- Tech categories -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">
+                    <div class="p-5 bg-surface-container rounded-lg border-l-2 border-primary">
+                        <h4 class="font-jetbrains font-bold text-on-surface text-sm tracking-wider">AI_INTEGRATION</h4>
+                        <p class="text-xs text-on-surface-variant mt-2">OpenAI GPT-4, Anthropic Claude, Prompt Engineering, RAG, Fine-tuning</p>
+                    </div>
+                    <div class="p-5 bg-surface-container rounded-lg border-l-2 border-tertiary">
+                        <h4 class="font-jetbrains font-bold text-on-surface text-sm tracking-wider">AUTOMATION</h4>
+                        <p class="text-xs text-on-surface-variant mt-2">n8n, Make, Python Scripts, Webhooks, REST APIs, Cron Jobs</p>
+                    </div>
+                    <div class="p-5 bg-surface-container rounded-lg border-l-2 border-error">
+                        <h4 class="font-jetbrains font-bold text-on-surface text-sm tracking-wider">INFRASTRUCTURE</h4>
+                        <p class="text-xs text-on-surface-variant mt-2">Docker, Supabase, PostgreSQL, Cloud Deploy, CI/CD</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════ CERTIFICATIONS SECTION ═══════════════════════ -->
+        <section class="py-24 px-6 md:px-[10%]" id="certs">
+            <div class="max-w-5xl mx-auto reveal">
+                <div class="flex justify-between items-end mb-12">
+                    <div>
+                        <span class="font-jetbrains text-primary text-xs tracking-[0.4em] uppercase">Section 05 // Verified Data</span>
+                        <h2 class="text-4xl md:text-5xl font-headline font-bold text-on-surface mt-2 tracking-tight">CERTIFICATIONS</h2>
+                    </div>
+                </div>
+                <!--
+                ════════════════════════════════════════════════════════════════
+                  COMO ADICIONAR IMAGEM DO CERTIFICADO:
+                  1. Salve o arquivo em "images/" (ex: images/cert-ai.jpg)
+                  2. Defina  data-cert-image="images/cert-ai.jpg"  no card
+                  3. Ajuste data-cert-issuer e data-cert-year se quiser
+                  4. Clique no card para abrir o lightbox com a imagem
+                ════════════════════════════════════════════════════════════════
+                -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                    <!-- Cert 1 ─────────────────────────────────────────────
+                         data-cert-image="images/cert-ai-architecture.jpg"   -->
+                    <div class="cert-card p-7 bg-surface-container border border-outline-variant/5 rounded-xl hover:bg-surface-bright transition-all group hover:border-primary/20 hover:shadow-[0_0_20px_rgba(156,255,147,0.07)]"
+                         onclick="openCertModal(this)"
+                         data-cert-title="AI Solutions Architecture"
+                         data-cert-issuer=""
+                         data-cert-year="2024"
+                         data-cert-image="">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                                <i class="fa-solid fa-certificate text-primary text-lg"></i>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[10px] font-jetbrains text-on-surface-variant uppercase tracking-wider">2024</span>
+                                <i class="fa-solid fa-expand text-[10px] text-on-surface-variant/40 group-hover:text-primary/60 transition-colors"></i>
+                            </div>
+                        </div>
+                        <h3 class="font-headline font-bold text-lg text-on-surface group-hover:text-primary transition-colors">AI Solutions Architecture</h3>
+                        <p class="text-sm text-on-surface-variant mt-2 leading-relaxed">Especialização em arquitetura de soluções com IA generativa e prompt engineering para ecossistemas empresariais.</p>
+                    </div>
+
+                    <!-- Cert 2 ─────────────────────────────────────────────
+                         data-cert-image="images/cert-workflow.jpg"          -->
+                    <div class="cert-card p-7 bg-surface-container border border-outline-variant/5 rounded-xl hover:bg-surface-bright transition-all group hover:border-tertiary/20 hover:shadow-[0_0_20px_rgba(0,219,236,0.07)]"
+                         onclick="openCertModal(this)"
+                         data-cert-title="Workflow Optimization Specialist"
+                         data-cert-issuer=""
+                         data-cert-year="2024"
+                         data-cert-image="">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-tertiary/10 flex items-center justify-center">
+                                <i class="fa-solid fa-award text-tertiary text-lg"></i>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[10px] font-jetbrains text-on-surface-variant uppercase tracking-wider">2024</span>
+                                <i class="fa-solid fa-expand text-[10px] text-on-surface-variant/40 group-hover:text-tertiary/60 transition-colors"></i>
+                            </div>
+                        </div>
+                        <h3 class="font-headline font-bold text-lg text-on-surface group-hover:text-tertiary transition-colors">Workflow Optimization Specialist</h3>
+                        <p class="text-sm text-on-surface-variant mt-2 leading-relaxed">Domínio avançado em frameworks de integração n8n e Make para automação empresarial.</p>
+                    </div>
+
+                    <!-- Cert 3 ─────────────────────────────────────────────
+                         data-cert-image="images/cert-data.jpg"              -->
+                    <div class="cert-card p-7 bg-surface-container border border-outline-variant/5 rounded-xl hover:bg-surface-bright transition-all group hover:border-secondary-dim/20 hover:shadow-[0_0_20px_rgba(202,218,183,0.07)]"
+                         onclick="openCertModal(this)"
+                         data-cert-title="Data Systems Engineering"
+                         data-cert-issuer=""
+                         data-cert-year="2023"
+                         data-cert-image="">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-secondary-dim/10 flex items-center justify-center">
+                                <i class="fa-solid fa-cloud text-secondary-dim text-lg"></i>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[10px] font-jetbrains text-on-surface-variant uppercase tracking-wider">2023</span>
+                                <i class="fa-solid fa-expand text-[10px] text-on-surface-variant/40 group-hover:text-secondary-dim/60 transition-colors"></i>
+                            </div>
+                        </div>
+                        <h3 class="font-headline font-bold text-lg text-on-surface group-hover:text-secondary-dim transition-colors">Data Systems Engineering</h3>
+                        <p class="text-sm text-on-surface-variant mt-2 leading-relaxed">Gerenciamento de bancos de dados relacionais e protocolos de infraestrutura em nuvem.</p>
+                    </div>
+
+                    <!-- Cert 4 ─────────────────────────────────────────────
+                         data-cert-image="images/cert-python.jpg"            -->
+                    <div class="cert-card p-7 bg-surface-container border border-outline-variant/5 rounded-xl hover:bg-surface-bright transition-all group hover:border-error/20 hover:shadow-[0_0_20px_rgba(255,115,81,0.07)]"
+                         onclick="openCertModal(this)"
+                         data-cert-title="Python for Automation"
+                         data-cert-issuer=""
+                         data-cert-year="2023"
+                         data-cert-image="">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-error/10 flex items-center justify-center">
+                                <i class="fa-brands fa-python text-error text-lg"></i>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[10px] font-jetbrains text-on-surface-variant uppercase tracking-wider">2023</span>
+                                <i class="fa-solid fa-expand text-[10px] text-on-surface-variant/40 group-hover:text-error/60 transition-colors"></i>
+                            </div>
+                        </div>
+                        <h3 class="font-headline font-bold text-lg text-on-surface group-hover:text-error transition-colors">Python for Automation</h3>
+                        <p class="text-sm text-on-surface-variant mt-2 leading-relaxed">Python avançado aplicado a scripts de automação, web scraping e integração de APIs.</p>
+                    </div>
+
+                    <!-- Cert 5 ─────────────────────────────────────────────
+                         data-cert-image="images/cert-crm.jpg"               -->
+                    <div class="cert-card p-7 bg-surface-container border border-outline-variant/5 rounded-xl hover:bg-surface-bright transition-all group hover:border-primary/20 hover:shadow-[0_0_20px_rgba(156,255,147,0.07)]"
+                         onclick="openCertModal(this)"
+                         data-cert-title="CRM & Marketing Automation"
+                         data-cert-issuer=""
+                         data-cert-year="2022"
+                         data-cert-image="">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                                <i class="fa-solid fa-diagram-project text-primary text-lg"></i>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[10px] font-jetbrains text-on-surface-variant uppercase tracking-wider">2022</span>
+                                <i class="fa-solid fa-expand text-[10px] text-on-surface-variant/40 group-hover:text-primary/60 transition-colors"></i>
+                            </div>
+                        </div>
+                        <h3 class="font-headline font-bold text-lg text-on-surface group-hover:text-primary transition-colors">CRM & Marketing Automation</h3>
+                        <p class="text-sm text-on-surface-variant mt-2 leading-relaxed">Implementação e otimização de pipelines de CRM com RD Station e Bitrix24.</p>
+                    </div>
+
+                    <!-- Cert 6 ─────────────────────────────────────────────
+                         data-cert-image="images/cert-docker.jpg"            -->
+                    <div class="cert-card p-7 bg-surface-container border border-outline-variant/5 rounded-xl hover:bg-surface-bright transition-all group hover:border-tertiary/20 hover:shadow-[0_0_20px_rgba(0,219,236,0.07)]"
+                         onclick="openCertModal(this)"
+                         data-cert-title="Docker & Cloud Infrastructure"
+                         data-cert-issuer=""
+                         data-cert-year="2022"
+                         data-cert-image="">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-tertiary/10 flex items-center justify-center">
+                                <i class="fa-solid fa-shield-halved text-tertiary text-lg"></i>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[10px] font-jetbrains text-on-surface-variant uppercase tracking-wider">2022</span>
+                                <i class="fa-solid fa-expand text-[10px] text-on-surface-variant/40 group-hover:text-tertiary/60 transition-colors"></i>
+                            </div>
+                        </div>
+                        <h3 class="font-headline font-bold text-lg text-on-surface group-hover:text-tertiary transition-colors">Docker & Cloud Infrastructure</h3>
+                        <p class="text-sm text-on-surface-variant mt-2 leading-relaxed">Containerização, deploy e orquestração de serviços em ambientes cloud.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════ CONTACT SECTION ═══════════════════════ -->
+        <section class="py-32 px-6 md:px-[10%] bg-surface-container-lowest" id="contact">
+            <div class="max-w-4xl mx-auto border border-primary/15 rounded-3xl p-10 md:p-20 text-center relative overflow-hidden reveal">
+                <div class="absolute top-0 right-0 w-72 h-72 bg-primary/5 blur-[150px] -z-10"></div>
+                <div class="absolute bottom-0 left-0 w-72 h-72 bg-tertiary/5 blur-[150px] -z-10"></div>
+
+                <span class="font-jetbrains text-primary text-xs tracking-[0.4em] uppercase">Section 06 // Conexão</span>
+                <h2 class="text-4xl sm:text-5xl md:text-7xl font-headline font-bold text-on-surface tracking-tighter mt-3 mb-6 leading-none">
+                    ESTABLISH<br class="hidden sm:block"/>_CONNECTION
+                </h2>
+                <p class="text-on-surface-variant text-lg mb-10 max-w-xl mx-auto">
+                    Pronto para arquitetar sua inteligência? Abra um canal seguro para consultorias estratégicas e projetos.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-5">
+                    <a class="px-10 py-5 bg-primary text-on-primary font-jetbrains font-bold text-xs tracking-widest rounded hover:shadow-[0_0_30px_rgba(156,255,147,0.3)] transition-all flex items-center justify-center gap-3 group"
+                       href="https://wa.me/5541999999999" target="_blank" rel="noopener">
+                        <i class="fa-brands fa-whatsapp text-lg group-hover:scale-110 transition-transform"></i>
+                        WHATSAPP
+                    </a>
+                    <a class="px-10 py-5 border border-outline/30 text-on-surface font-jetbrains font-bold text-xs tracking-widest rounded hover:bg-surface-bright hover:border-primary/30 transition-all flex items-center justify-center gap-3 group"
+                       href="https://linkedin.com/in/gustavobieda" target="_blank" rel="noopener">
+                        <i class="fa-brands fa-linkedin text-lg group-hover:scale-110 transition-transform group-hover:text-primary"></i>
+                        LINKEDIN
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#0a0a0a] border-t border-[#494847]/10 font-jetbrains text-[10px] uppercase tracking-widest px-8 py-10 relative z-10">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6 w-full max-w-6xl mx-auto">
+            <div class="text-primary/80 font-bold">© 2024 GUSTAVO_BIEDA // NEURAL_ARCHITECT_PROTOCOL</div>
+            <div class="flex gap-8">
+                <a class="text-on-surface-variant hover:text-primary transition-all" href="https://linkedin.com/in/gustavobieda" target="_blank">LinkedIn</a>
+                <a class="text-on-surface-variant hover:text-primary transition-all" href="https://wa.me/5541999999999" target="_blank">WhatsApp</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══════════════════════ PROJECT MODAL ═══════════════════════ -->
+    <div class="modal-overlay fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4" id="projectModal">
+        <div class="modal-content bg-surface-container-high border border-outline-variant/20 rounded-2xl p-8 max-w-2xl w-full relative max-h-[90vh] overflow-y-auto">
+            <button class="absolute top-4 right-4 text-on-surface-variant hover:text-primary transition-colors text-xl z-10" onclick="closeModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="flex items-center gap-3 mb-5">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center" id="modalIcon">
+                    <!-- Icon set by JS -->
+                </div>
+                <div>
+                    <span class="font-jetbrains text-[10px] text-primary tracking-widest uppercase" id="modalCategory">Categoria</span>
+                    <h3 class="font-headline font-bold text-xl text-on-surface" id="modalTitle">Projeto</h3>
+                </div>
+            </div>
+
+            <!-- ═ GALERIA DE IMAGENS DO PROJETO ═
+                 As imagens são definidas no objeto projectsData no JS.
+                 Campo: images: ["caminho/imagem.png", "outro/print.jpg"]
+                 Deixe images: [] para não exibir galeria.          -->
+            <div id="modalGallery" class="mb-5 hidden">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-jetbrains text-[10px] text-primary tracking-widest uppercase">Imagens do Projeto</span>
+                    <span class="font-jetbrains text-[9px] text-on-surface-variant" id="galleryCount"></span>
+                </div>
+                <div class="project-gallery" id="galleryImages"></div>
+            </div>
+
+            <p class="text-on-surface-variant leading-relaxed mb-6" id="modalDesc">Descrição do projeto...</p>
+            <div class="mb-5">
+                <span class="font-jetbrains text-[10px] text-primary tracking-widest uppercase">Ferramentas utilizadas</span>
+                <div class="flex flex-wrap gap-2 mt-2" id="modalTools">
+                    <!-- Tags set by JS -->
+                </div>
+            </div>
+            <div class="p-4 bg-surface-container rounded-lg border border-primary/10">
+                <span class="font-jetbrains text-[10px] text-primary tracking-widest uppercase">Resultado</span>
+                <p class="text-on-surface text-sm mt-1 font-medium" id="modalResult">Resultado alcançado...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════ CERT LIGHTBOX ═══════════════════════ -->
+    <!--
+        COMO ADICIONAR IMAGEM DO CERTIFICADO:
+        1. Coloque o arquivo na pasta "images/" (ex: images/cert-ai.jpg)
+        2. No card HTML da seção CERTIFICATIONS, defina:
+               data-cert-image="images/cert-ai.jpg"
+        3. Clique no card para abrir o lightbox automaticamente.
+    -->
+    <div class="cert-lightbox fixed inset-0 bg-black/85 backdrop-blur-md z-[110] flex flex-col items-center justify-center p-4 gap-4" id="certLightbox">
+        <div class="cert-lightbox-inner flex flex-col items-center gap-4">
+            <!-- Header -->
+            <div class="flex items-center justify-between w-full">
+                <div>
+                    <span class="font-jetbrains text-[10px] text-primary tracking-widest uppercase">Certificado</span>
+                    <h3 class="font-headline font-bold text-xl text-on-surface" id="certLightboxTitle"></h3>
+                    <p class="font-jetbrains text-[10px] text-on-surface-variant mt-0.5" id="certLightboxMeta"></p>
+                </div>
+                <button class="w-10 h-10 rounded-full bg-surface-container-high border border-outline-variant/20 text-on-surface-variant hover:text-primary hover:border-primary/30 transition-all flex items-center justify-center"
+                        onclick="closeCertModal()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <!-- Image or placeholder -->
+            <div id="certImageContainer" class="w-full flex items-center justify-center">
+                <!-- filled by JS -->
+            </div>
+            <!-- Actions -->
+            <div class="flex gap-3" id="certLightboxActions">
+                <!-- filled by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Fullscreen image zoom overlay -->
+    <div class="cert-lightbox fixed inset-0 bg-black/95 backdrop-blur-sm z-[120] items-center justify-center p-4" id="imgZoomOverlay" style="display:none; opacity:1; pointer-events:all;">
+        <button class="absolute top-4 right-4 w-10 h-10 rounded-full bg-surface-container-high border border-outline-variant/20 text-on-surface-variant hover:text-primary transition-all flex items-center justify-center"
+                onclick="document.getElementById('imgZoomOverlay').style.display='none'; document.body.style.overflow='';">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <img id="imgZoomSrc" src="" alt="Zoom" class="max-w-full max-h-full object-contain rounded-lg" />
+    </div>
+
+    <!-- ═══════════════════════ JAVASCRIPT ═══════════════════════ -->
+    <script>
+        // ============ PROJECT DATA ============
+        // ─────────────────────────────────────────────────────────────────────────
+        //  COMO ADICIONAR IMAGENS AOS PROJETOS:
+        //
+        //  1. Crie a pasta "images/" dentro de "New Portifolio/"
+        //  2. Coloque os arquivos de imagem lá (PNG, JPG, WebP)
+        //  3. Em cada projeto, preencha os campos abaixo:
+        //
+        //     images: ["images/nome-do-arquivo.png", "images/outro.jpg"]
+        //       → Exibidos como galeria no modal (scroll horizontal se +1 imagem)
+        //       → Deixe [] para não mostrar galeria
+        //
+        //     thumb: "images/thumb-pequena.png"
+        //       → Thumbnail exibida diretamente no nó do canvas
+        //       → Deixe "" para não mostrar thumbnail no nó
+        // ─────────────────────────────────────────────────────────────────────────
+        const projectsData = {
+            // ═══════════ AGENTES IA ═══════════
+            sdr: {
+                title: "SDR de Atendimento",
+                category: "Agentes IA",
+                icon: '<i class="fa-solid fa-chart-column text-tertiary text-xl"></i>',
+                iconBg: "bg-tertiary/15",
+                desc: "SDR de atendimento e pré-qualificação para a Hitech-e. Entra em contato com leads, qualifica e marca reuniões de forma autônoma.",
+                tools: ["n8n", "OpenAI", "Supabase", "Bitrix24"],
+                result: "Taxa leads → reunião: 5% → 30%",
+                images: [
+                    // "images/sdr-fluxo.png",
+                ],
+                thumb: "",
+            },
+            followup: {
+                title: "Sistema de Follow-up",
+                category: "Agentes IA",
+                icon: '<i class="fa-solid fa-arrows-rotate text-tertiary text-xl"></i>',
+                iconBg: "bg-tertiary/15",
+                desc: "Automação que reengaja leads que pararam de responder. Opera exclusivamente dentro do horário comercial para manter naturalidade nas interações.",
+                tools: ["n8n", "WhatsApp API", "Bitrix24"],
+                result: "",
+                images: [
+                    // "images/followup-workflow.png",
+                ],
+                thumb: "",
+            },
+            integracao: {
+                title: "Integração Bitrix24/RD Station",
+                category: "Agentes IA",
+                icon: '<i class="fa-solid fa-link text-tertiary text-xl"></i>',
+                iconBg: "bg-tertiary/15",
+                desc: "Integração completa entre SDR e CRM. Dispara mensagens, preenche campos personalizados e movimenta o lead pelo funil conforme ele evolui.",
+                tools: ["n8n", "Bitrix24", "RD Station"],
+                result: "",
+                images: [
+                    // "images/integracao-crm.png",
+                ],
+                thumb: "",
+            },
+
+            // ═══════════ AGENTES INTELIGENTES ═══════════
+            agente_atend: {
+                title: "Agente de Atendimento",
+                category: "Agentes Inteligentes",
+                icon: '<i class="fa-solid fa-headset text-secondary-dim text-xl"></i>',
+                iconBg: "bg-secondary-dim/15",
+                desc: "Agente inteligente via WhatsApp com GPT-4.1 para compreender contexto e responder perguntas complexas. Integrado ao CRM com escalamento inteligente para equipe humana.",
+                tools: ["OpenAI API", "n8n", "WhatsApp API", "Supabase", "Bitrix24"],
+                result: "",
+                images: [
+                    // "images/agente-atend-chat.png",
+                ],
+                thumb: "",
+            },
+            agente_agenda: {
+                title: "Agente de Agendamento",
+                category: "Agentes Inteligentes",
+                icon: '<i class="fa-solid fa-calendar-check text-secondary-dim text-xl"></i>',
+                iconBg: "bg-secondary-dim/15",
+                desc: "Agente de IA que gerencia e realiza agendamentos de forma autônoma em múltiplas agendas simultaneamente, sem intervenção humana.",
+                tools: ["n8n", "OpenAI", "Google Calendar API"],
+                result: "",
+                images: [
+                    // "images/agente-agenda-flow.png",
+                ],
+                thumb: "",
+            },
+            analise_reunioes: {
+                title: "Análise de Reuniões",
+                category: "Agentes Inteligentes",
+                icon: '<i class="fa-solid fa-microphone text-secondary-dim text-xl"></i>',
+                iconBg: "bg-secondary-dim/15",
+                desc: "Solução que participa de reuniões de vendas e gera automaticamente um relatório com pontos positivos, negativos e próximos passos para fechar o negócio.",
+                tools: ["n8n", "OpenAI", "Google Meet API"],
+                result: "",
+                images: [
+                    // "images/analise-reunioes.png",
+                ],
+                thumb: "",
+            },
+
+            // ═══════════ DASHBOARDS & ANALYTICS ═══════════
+            dash_vendas: {
+                title: "Dashboard de Vendas",
+                category: "Dashboards & Analytics",
+                icon: '<i class="fa-solid fa-chart-bar text-primary text-xl"></i>',
+                iconBg: "bg-primary/15",
+                desc: "Dashboard de vendas com diversas formas de visualização e filtros. Conectado diretamente ao CRM para exibir dados em tempo real.",
+                tools: ["n8n", "Bitrix24 API", "Lovable"],
+                result: "",
+                images: [
+                    // "images/dash-vendas.png",
+                ],
+                thumb: "",
+            },
+            dash_marketing: {
+                title: "Dashboard de Marketing",
+                category: "Dashboards & Analytics",
+                icon: '<i class="fa-solid fa-bullhorn text-primary text-xl"></i>',
+                iconBg: "bg-primary/15",
+                desc: "Dashboard integrado com Meta Ads e Google Ads para acompanhamento unificado de campanhas pagas, métricas e performance em tempo real.",
+                tools: ["Meta API", "Google Ads API", "Lovable"],
+                result: "",
+                images: [
+                    // "images/dash-marketing.png",
+                ],
+                thumb: "",
+            },
+
+            // ═══════════ SITES & DESENVOLVIMENTO WEB ═══════════
+            milenia: {
+                title: "Milen-ia.com",
+                category: "Sites & Desenvolvimento Web",
+                icon: '<i class="fa-solid fa-globe text-error text-xl"></i>',
+                iconBg: "bg-error/15",
+                desc: "Site institucional completo desenvolvido com design moderno e foco em conversão.",
+                tools: ["Lovable", "Next.js", "Tailwind"],
+                result: "",
+                images: [
+                    // "images/milenia-home.png",
+                ],
+                thumb: "",
+            },
+            blog_auto: {
+                title: "Gerador de Blog Automático",
+                category: "Sites & Desenvolvimento Web",
+                icon: '<i class="fa-solid fa-pen-nib text-error text-xl"></i>',
+                iconBg: "bg-error/15",
+                desc: "Sistema que publica artigos diariamente de forma autônoma, com o objetivo de atrair leads orgânicos via conteúdo relevante e otimizado para SEO.",
+                tools: ["n8n", "OpenAI", "Lovable"],
+                result: "",
+                images: [
+                    // "images/blog-auto.png",
+                ],
+                thumb: "",
+            }
+        };
+
+        // ============ CUSTOM CURSOR ============
+        const cursor = document.getElementById('customCursor');
+        const cursorDot = document.getElementById('cursorDot');
+        const aura = document.getElementById('aura');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            if (cursorDot) {
+                cursorDot.style.left = e.clientX + 'px';
+                cursorDot.style.top = e.clientY + 'px';
+            }
+            if (aura) {
+                aura.style.left = e.clientX + 'px';
+                aura.style.top = e.clientY + 'px';
+            }
+        });
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.15;
+            cursorY += (mouseY - cursorY) * 0.15;
+            if (cursor) {
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+            }
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Hover effect on interactive elements
+        document.querySelectorAll('a, button, .sub-node, .tool-card, .nav-link').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor && cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor && cursor.classList.remove('hover'));
+        });
+
+        // ============ TYPEWRITER EFFECT ============
+        const typewriterEl = document.getElementById('typewriter');
+        const phrases = [
+            'Head of Technology',
+            'AI Solutions Architect',
+            'Automation Engineer',
+            'Digital Transformation Lead'
+        ];
+        let phraseIdx = 0, charIdx = 0, isDeleting = false;
+
+        function typewrite() {
+            const current = phrases[phraseIdx];
+            if (!isDeleting) {
+                typewriterEl.textContent = current.substring(0, charIdx + 1);
+                charIdx++;
+                if (charIdx === current.length) {
+                    isDeleting = true;
+                    setTimeout(typewrite, 2000);
+                    return;
+                }
+                setTimeout(typewrite, 80);
+            } else {
+                typewriterEl.textContent = current.substring(0, charIdx - 1);
+                charIdx--;
+                if (charIdx === 0) {
+                    isDeleting = false;
+                    phraseIdx = (phraseIdx + 1) % phrases.length;
+                    setTimeout(typewrite, 500);
+                    return;
+                }
+                setTimeout(typewrite, 40);
+            }
+        }
+        typewrite();
+
+        // ============ PARTICLES (Hero) ============
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const PARTICLE_COUNT = 60;
+
+        function resizeCanvas() {
+            const hero = document.getElementById('hero');
+            canvas.width = hero.offsetWidth;
+            canvas.height = hero.offsetHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.radius = Math.random() * 2 + 0.5;
+                this.opacity = Math.random() * 0.5 + 0.1;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(156, 255, 147, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+            particles.push(new Particle());
+        }
+
+        function drawConnections() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 150) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(156, 255, 147, ${0.08 * (1 - dist / 150)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            drawConnections();
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // ============ SCROLL REVEAL ============
+        const revealElements = document.querySelectorAll('.reveal');
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // ============ SKILL BARS ANIMATION ============
+        const skillBars = document.querySelectorAll('.skill-bar-fill');
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bar = entry.target;
+                    const width = bar.getAttribute('data-width');
+                    bar.style.width = width + '%';
+                    bar.classList.add('animated');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        skillBars.forEach(bar => skillObserver.observe(bar));
+
+        // ============ ACTIVE NAV INDICATOR ============
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active', 'text-primary');
+                link.classList.add('text-on-surface-variant');
+                if (link.getAttribute('data-section') === current) {
+                    link.classList.add('active', 'text-primary');
+                    link.classList.remove('text-on-surface-variant');
+                }
+            });
+        });
+
+        // ============ SMOOTH SCROLL ============
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // ============ MOBILE MENU ============
+        const menuBtn = document.getElementById('menuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        menuBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
+        closeMenuBtn.addEventListener('click', () => mobileMenu.classList.remove('open'));
+
+        function closeMobile() {
+            mobileMenu.classList.remove('open');
+        }
+
+        // ============ PROJECT MODAL ============
+        const modal = document.getElementById('projectModal');
+
+        function openModal(projectId) {
+            const project = projectsData[projectId];
+            if (!project) return;
+
+            document.getElementById('modalTitle').textContent = project.title;
+            document.getElementById('modalCategory').textContent = project.category;
+            document.getElementById('modalDesc').textContent = project.desc;
+            document.getElementById('modalResult').textContent = project.result;
+
+            const iconContainer = document.getElementById('modalIcon');
+            iconContainer.innerHTML = project.icon;
+            iconContainer.className = `w-12 h-12 rounded-xl flex items-center justify-center ${project.iconBg}`;
+
+            const toolsContainer = document.getElementById('modalTools');
+            toolsContainer.innerHTML = project.tools.map(tool =>
+                `<span class="px-3 py-1 bg-surface-container rounded-full text-[11px] font-jetbrains text-primary border border-primary/10">${tool}</span>`
+            ).join('');
+
+            // ── Galeria de imagens ──
+            const gallerySection = document.getElementById('modalGallery');
+            const galleryImages  = document.getElementById('galleryImages');
+            const galleryCount   = document.getElementById('galleryCount');
+            const imgs = (project.images || []).filter(Boolean);
+
+            if (imgs.length > 0) {
+                galleryImages.innerHTML = '';
+                galleryImages.className = `project-gallery${imgs.length > 1 ? ' multi' : ''}`;
+                imgs.forEach(src => {
+                    const img = document.createElement('img');
+                    img.src = src;
+                    img.alt = project.title;
+                    img.loading = 'lazy';
+                    img.title = 'Clique para ampliar';
+                    img.addEventListener('click', () => openImageZoom(src));
+                    galleryImages.appendChild(img);
+                });
+                galleryCount.textContent = imgs.length > 1 ? `${imgs.length} imagens — arraste para ver mais` : '';
+                gallerySection.classList.remove('hidden');
+            } else {
+                gallerySection.classList.add('hidden');
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function openImageZoom(src) {
+            document.getElementById('imgZoomSrc').src = src;
+            const overlay = document.getElementById('imgZoomOverlay');
+            overlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        document.getElementById('imgZoomOverlay').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('imgZoomOverlay')) {
+                document.getElementById('imgZoomOverlay').style.display = 'none';
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+                closeCertModal();
+                document.getElementById('imgZoomOverlay').style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        });
+
+        // ── Thumb nos nós do canvas ──
+        (function renderNodeThumbs() {
+            document.querySelectorAll('.sub-node[data-project]').forEach(node => {
+                const id = node.getAttribute('data-project');
+                const p  = projectsData[id];
+                if (p && p.thumb) {
+                    const img = document.createElement('img');
+                    img.src = p.thumb;
+                    img.alt = p.title;
+                    img.className = 'node-thumb';
+                    node.appendChild(img);
+                }
+            });
+        })();
+
+        // ============ CERT LIGHTBOX ============
+        // ─────────────────────────────────────────────────────────────────────
+        //  COMO ADICIONAR IMAGEM DO CERTIFICADO:
+        //  Adicione data-cert-image="images/nome-do-cert.jpg" no card HTML.
+        //  Exemplo: data-cert-image="images/cert-ai-architecture.jpg"
+        // ─────────────────────────────────────────────────────────────────────
+        const certLightbox = document.getElementById('certLightbox');
+
+        function openCertModal(el) {
+            const title    = el.getAttribute('data-cert-title') || el.querySelector('h3')?.textContent || 'Certificado';
+            const issuer   = el.getAttribute('data-cert-issuer') || '';
+            const year     = el.getAttribute('data-cert-year') || '';
+            const imgSrc   = el.getAttribute('data-cert-image') || '';
+
+            document.getElementById('certLightboxTitle').textContent = title;
+            document.getElementById('certLightboxMeta').textContent =
+                [issuer, year].filter(Boolean).join(' · ');
+
+            const container = document.getElementById('certImageContainer');
+            if (imgSrc) {
+                container.innerHTML = `
+                    <img src="${imgSrc}" alt="${title}"
+                         class="cursor-zoom-in"
+                         onclick="openImageZoom('${imgSrc}')"
+                         title="Clique para ampliar" />`;
+            } else {
+                container.innerHTML = `
+                    <div class="cert-placeholder w-full">
+                        <i class="fa-solid fa-image text-5xl opacity-20"></i>
+                        <div class="text-center">
+                            <p class="font-jetbrains text-xs tracking-widest uppercase">Sem imagem cadastrada</p>
+                            <p class="text-[11px] mt-1 opacity-60">Adicione <code class="bg-surface-container px-1 rounded">data-cert-image="images/cert.jpg"</code> no card HTML</p>
+                        </div>
+                    </div>`;
+            }
+
+            const actions = document.getElementById('certLightboxActions');
+            actions.innerHTML = imgSrc
+                ? `<button onclick="openImageZoom('${imgSrc}')"
+                           class="px-5 py-2.5 border border-primary/30 text-primary font-jetbrains text-xs tracking-widest rounded hover:bg-primary/10 transition-all flex items-center gap-2">
+                       <i class="fa-solid fa-expand"></i> AMPLIAR
+                   </button>`
+                : '';
+
+            certLightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCertModal() {
+            certLightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        certLightbox.addEventListener('click', (e) => {
+            if (e.target === certLightbox) closeCertModal();
+        });
+
+        // ============ CANVAS SVG CONNECTIONS (Dynamic) ============
+        function drawSvgConnections() {
+            const svg = document.getElementById('canvasSvg');
+            if (!svg) return;
+
+            const container = svg.parentElement;
+            const rect = container.getBoundingClientRect();
+            svg.setAttribute('viewBox', `0 0 ${rect.width} ${rect.height}`);
+            svg.style.width = rect.width + 'px';
+            svg.style.height = rect.height + 'px';
+
+            // Only draw on desktop
+            if (window.innerWidth < 768) {
+                svg.innerHTML = '';
+                return;
+            }
+
+            const coreNode = container.querySelector('.core-pulse');
+            const subNodes = container.querySelectorAll('.sub-node');
+
+            if (!coreNode || subNodes.length === 0) return;
+
+            const coreRect = coreNode.getBoundingClientRect();
+            const coreCX = coreRect.left + coreRect.width / 2 - rect.left;
+            const coreCY = coreRect.top + coreRect.height / 2 - rect.top;
+
+            let paths = '';
+            subNodes.forEach(node => {
+                const nodeRect = node.getBoundingClientRect();
+                const nodeCX = nodeRect.left + nodeRect.width / 2 - rect.left;
+                const nodeCY = nodeRect.top + nodeRect.height / 2 - rect.top;
+
+                const midX = (coreCX + nodeCX) / 2;
+                const controlY1 = coreCY;
+                const controlY2 = nodeCY;
+
+                paths += `<path class="connection-line" d="M ${coreCX} ${coreCY} C ${midX} ${controlY1}, ${midX} ${controlY2}, ${nodeCX} ${nodeCY}" stroke="rgba(156,255,147,0.12)" stroke-width="1.5" fill="none"/>`;
+            });
+
+            svg.innerHTML = paths;
+        }
+
+        // Draw connections after layout settles
+        setTimeout(drawSvgConnections, 500);
+        window.addEventListener('resize', () => setTimeout(drawSvgConnections, 200));
+
+    </script>
+</body>
+</html>
